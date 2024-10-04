@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.AddressDao;
 import edu.sm.dto.Address;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class AddressService implements MService<Integer, Address> {
 
-    AddressDao dao;
+    Dao<Integer, Address> dao;
     ConnectionPool cp;
 
-    public AddressService() {
-        dao = new AddressDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public AddressService(Dao<Integer,Address> dao , ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override
@@ -99,6 +96,7 @@ public class AddressService implements MService<Integer, Address> {
 
     public boolean setDefaultAddress(Integer addressKey, Integer custId) throws Exception {
         Connection con = cp.getConnection();
+        AddressDao dao = new AddressDao();
         boolean result = false;
         try {
             result = dao.setDefaultAddress(addressKey, custId, con);

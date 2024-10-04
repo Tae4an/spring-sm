@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.OrderDetailDao;
 import edu.sm.dto.OrderDetail;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class OrderDetailService implements MService<Integer, OrderDetail> {
 
-    OrderDetailDao dao;
+    Dao<Integer, OrderDetail> dao;
     ConnectionPool cp;
 
-    public OrderDetailService() {
-        dao = new OrderDetailDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public OrderDetailService(Dao<Integer, OrderDetail> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override

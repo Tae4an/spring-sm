@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.WishDao;
 import edu.sm.dto.Wish;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class WishService implements MService<Integer, Wish> {
 
-    WishDao dao;
+    Dao<Integer, Wish> dao;
     ConnectionPool cp;
 
-    public WishService() {
-        dao = new WishDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public WishService(Dao<Integer, Wish> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override

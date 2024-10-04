@@ -4,29 +4,74 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-    <bean id="connectionpool" class="edu.sm.frame.ConnectionPool" factory-method="create"></bean>
+    <!-- ConnectionPool bean -->
+    <bean id="connectionPool" class="edu.sm.frame.ConnectionPool" factory-method="create"/>
 
-    <bean id="addressdao" class="edu.sm.dao.AddressDao"></bean>
+    <!-- DAO beans -->
+    <bean id="addressDao" class="edu.sm.dao.AddressDao"/>
+    <bean id="boardDao" class="edu.sm.dao.BoardDao"/>
+    <bean id="cartDao" class="edu.sm.dao.CartDao"/>
+    <bean id="deliveryDao" class="edu.sm.dao.DeliveryDao"/>
+    <bean id="mileageDao" class="edu.sm.dao.MileageDao"/>
+    <bean id="orderDao" class="edu.sm.dao.OrderDao"/>
+    <bean id="orderdetailDao" class="edu.sm.dao.OrderDetailDao"/>
+    <bean id="paymentDao" class="edu.sm.dao.PaymentDao"/>
+    <bean id="productDao" class="edu.sm.dao.ProductDao"/>
+    <bean id="usedmileageDao" class="edu.sm.dao.UsedMileageDao"/>
+    <bean id="wishDao" class="edu.sm.dao.WishDao"/>
+    <bean id="customerDao" class="edu.sm.dao.CustomerDao"/>
 
-    <bean id="boarddao" class="edu.sm.dao.BoardDao"></bean>
+    <!-- Service beans -->
+    <bean id="customerService" class="edu.sm.service.CustomerService">
+        <constructor-arg ref="customerDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="cartdao" class="edu.sm.dao.CartDao"></bean>
+    <bean id="addressService" class="edu.sm.service.AddressService">
+        <constructor-arg ref="addressDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="deliverydao" class="edu.sm.dao.DeliveryDao"></bean>
+    <bean id="boardService" class="edu.sm.service.BoardService">
+        <constructor-arg ref="boardDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="mileagedao" class="edu.sm.dao.MileageDao"></bean>
+    <bean id="cartService" class="edu.sm.service.CartService">
+        <constructor-arg ref="cartDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="orderdao" class="edu.sm.dao.OrderDao"></bean>
+    <bean id="deliveryService" class="edu.sm.service.DeliveryService">
+        <constructor-arg ref="deliveryDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="orderdetaildao" class="edu.sm.dao.OrderDetailDao"></bean>
+    <bean id="mileageService" class="edu.sm.service.MileageService">
+        <constructor-arg ref="mileageDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="paymentdao" class="edu.sm.dao.PaymentDao"></bean>
+    <bean id="wishService" class="edu.sm.service.WishService">
+        <constructor-arg ref="wishDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="productdao" class="edu.sm.dao.ProductDao"></bean>
+    <bean id="productService" class="edu.sm.service.ProductService">
+        <constructor-arg ref="productDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
 
-    <bean id="usedmileagedao" class="edu.sm.dao.UsedMileageDao"></bean>
-
-    <bean id="wishdao" class="edu.sm.dao.WishDao"></bean>
-
+    <!-- Utils bean -->
+    <bean id="utils" class="edu.sm.util.Utils">
+        <constructor-arg ref="customerService"/>
+        <constructor-arg ref="addressService"/>
+        <constructor-arg ref="boardService"/>
+        <constructor-arg ref="cartService"/>
+        <constructor-arg ref="deliveryService"/>
+        <constructor-arg ref="mileageService"/>
+        <constructor-arg ref="wishService"/>
+        <constructor-arg ref="productService"/>
+    </bean>
 
 </beans>

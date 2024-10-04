@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.UsedMileageDao;
 import edu.sm.dto.UsedMileage;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class UsedMileageService implements MService<Integer, UsedMileage> {
 
-    UsedMileageDao dao;
+    Dao<Integer, UsedMileage> dao;
     ConnectionPool cp;
 
-    public UsedMileageService() {
-        dao = new UsedMileageDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public UsedMileageService(Dao<Integer, UsedMileage> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override

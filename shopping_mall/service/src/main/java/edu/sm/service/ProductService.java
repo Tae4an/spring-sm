@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.ProductDao;
 import edu.sm.dto.Product;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class ProductService implements MService<Integer, Product> {
 
-    ProductDao dao;
+    Dao<Integer,Product> dao;
     ConnectionPool cp;
 
-    public ProductService() {
-        dao = new ProductDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public ProductService(Dao<Integer,Product> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override
@@ -58,6 +55,7 @@ public class ProductService implements MService<Integer, Product> {
     @Override
     public Boolean remove(Integer id) throws Exception {
         Connection con = cp.getConnection();
+        ProductDao dao = new ProductDao();
         Boolean result = false;
         try {
             con.setAutoCommit(false);
@@ -102,6 +100,7 @@ public class ProductService implements MService<Integer, Product> {
 
     public Boolean toggleProductStatus(Integer id) throws Exception {
         Connection con = cp.getConnection();
+        ProductDao dao = new ProductDao();
         Boolean result = false;
         try {
             con.setAutoCommit(false);

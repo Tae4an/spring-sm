@@ -4,6 +4,8 @@ import edu.sm.dao.DeliveryDao;
 import edu.sm.dto.Delivery;
 import edu.sm.frame.ConnectionPool;
 import edu.sm.frame.MService;
+import edu.sm.frame.Dao;
+
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,16 +14,12 @@ import java.util.Objects;
 
 public class DeliveryService implements MService<Integer, Delivery> {
 
-    DeliveryDao dao;
+    Dao<Integer, Delivery> dao;
     ConnectionPool cp;
 
-    public DeliveryService() {
-        dao = new DeliveryDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public DeliveryService(Dao<Integer, Delivery> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override
@@ -104,6 +102,7 @@ public class DeliveryService implements MService<Integer, Delivery> {
 
     public Delivery viewShippingStatus(Integer orderId) throws Exception {
         Connection con = cp.getConnection();
+        DeliveryDao dao = new DeliveryDao();
         Delivery result = null;
         try {
             result = dao.viewShippingStatus(orderId, con);
@@ -117,6 +116,7 @@ public class DeliveryService implements MService<Integer, Delivery> {
 
     public Delivery editShippingInfo(Delivery delivery) throws Exception {
         Connection con = cp.getConnection();
+        DeliveryDao dao = new DeliveryDao();
         try {
             delivery = dao.editShippingInfo(delivery, con);
             System.out.println("Shipping info updated for delivery: " + delivery.getDeliveryId());

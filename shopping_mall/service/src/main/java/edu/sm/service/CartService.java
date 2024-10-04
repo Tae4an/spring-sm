@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.CartDao;
 import edu.sm.dto.Cart;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class CartService implements MService<Integer, Cart> {
 
-    CartDao dao;
+    Dao<Integer, Cart> dao;
     ConnectionPool cp;
 
-    public CartService() {
-        dao = new CartDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public CartService(Dao<Integer, Cart> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override

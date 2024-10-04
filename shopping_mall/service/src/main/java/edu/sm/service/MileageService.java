@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.MileageDao;
 import edu.sm.dto.Mileage;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class MileageService implements MService<Integer, Mileage> {
 
-    MileageDao dao;
+    Dao<Integer, Mileage> dao;
     ConnectionPool cp;
 
-    public MileageService() {
-        dao = new MileageDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public MileageService(Dao<Integer, Mileage> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override
@@ -99,6 +96,7 @@ public class MileageService implements MService<Integer, Mileage> {
 
     public Mileage addMileagePoints(Integer custId, Integer points) throws Exception {
         Connection con = cp.getConnection();
+        MileageDao dao = new MileageDao();
         try {
             con.setAutoCommit(false);
             Mileage mileage = dao.selectByCustId(custId, con);

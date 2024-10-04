@@ -4,6 +4,7 @@ package edu.sm.service;
 import edu.sm.dao.CustomerDao;
 import edu.sm.dto.Customer;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -12,16 +13,12 @@ import java.util.List;
 
 public class CustomerService implements MService<Integer, Customer> {
 
-    CustomerDao dao;
+    Dao<Integer, Customer> dao;
     ConnectionPool cp;
 
-    public CustomerService() {
-        dao = new CustomerDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public CustomerService(Dao<Integer, Customer> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override
@@ -99,6 +96,7 @@ public class CustomerService implements MService<Integer, Customer> {
     }
     public List<Customer> searchMembers(String keyword) throws Exception {
         Connection con = cp.getConnection();
+        CustomerDao dao = new CustomerDao();
         List<Customer> result = null;
         try {
             result = dao.searchMembers(keyword, con);

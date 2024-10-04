@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.BoardDao;
 import edu.sm.dto.Board;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class BoardService implements MService<Integer, Board> {
 
-    BoardDao dao;
+    Dao<Integer, Board> dao;
     ConnectionPool cp;
 
-    public BoardService() {
-        dao = new BoardDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public BoardService(Dao<Integer, Board> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override

@@ -2,14 +2,19 @@ package edu.sm.app;
 
 import edu.sm.dto.Customer;
 import edu.sm.util.Utils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static Customer loggedInCustomer = null;
+    private static Utils utils;
 
     public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        utils = context.getBean(Utils.class);
         while (true) {
             if (loggedInCustomer == null) {
                 handleGuestMenu();
@@ -30,8 +35,8 @@ public class Main {
             int choice = getChoice(3);
             try {
                 switch (choice) {
-                    case 1 -> loggedInCustomer = Utils.registerCustomer();
-                    case 2 -> loggedInCustomer = Utils.login();
+                    case 1 -> loggedInCustomer = utils.registerCustomer();
+                    case 2 -> loggedInCustomer = utils.login();
                     case 3 -> {
                         System.out.println("프로그램을 종료합니다.");
                         System.exit(0);
@@ -57,15 +62,15 @@ public class Main {
             System.out.println("8. 종료");
             System.out.print("선택: ");
 
-            int choice = getChoice(6);
+            int choice = getChoice(8);
             try {
                 switch (choice) {
                     case 1 -> handleMyPageMenu();
                     case 2 -> handleProductMenu();
                     case 3 -> handleCartMenu();
                     case 4 -> handleWishlistMenu();
-                    case 5 -> Utils.writeReview(loggedInCustomer);
-                    case 6 -> Utils.writeInquiry(loggedInCustomer);
+                    case 5 -> utils.writeReview(loggedInCustomer);
+                    case 6 -> utils.writeInquiry(loggedInCustomer);
                     case 7 -> {
                         System.out.println("로그아웃 되었습니다.");
                         loggedInCustomer = null;
@@ -98,23 +103,23 @@ public class Main {
             switch (choice) {
                 case 1 -> System.out.println(loggedInCustomer);
                 case 2 -> {
-                    loggedInCustomer = Utils.updateCustomerInfo(loggedInCustomer);
-                    System.out.println("회원 정보가 수정되었습니다.");                }
+                    loggedInCustomer = utils.updateCustomerInfo(loggedInCustomer);
+                    System.out.println("회원 정보가 수정되었습니다.");
+                }
                 case 3 -> {
-                    Utils.deleteCustomer(loggedInCustomer);
+                    utils.deleteCustomer(loggedInCustomer);
                     loggedInCustomer = null;
                     return;
                 }
-                case 4 -> Utils.setDefaultAddress(loggedInCustomer.getCustId());
-                case 5 -> Utils.checkMileage(loggedInCustomer);
-                case 6 -> Utils.viewDeliveryStatus(loggedInCustomer);
+                case 4 -> utils.setDefaultAddress(loggedInCustomer.getCustId());
+                case 5 -> utils.checkMileage(loggedInCustomer);
+                case 6 -> utils.viewDeliveryStatus(loggedInCustomer);
                 case 7 -> {
                     return;
                 }
             }
         }
     }
-
 
     private static void handleProductMenu() throws Exception {
         while (true) {
@@ -124,10 +129,10 @@ public class Main {
             System.out.println("3. 이전 메뉴로");
             System.out.print("선택: ");
 
-            int choice = getChoice(5);
+            int choice = getChoice(3);
             switch (choice) {
-                case 1 -> Utils.listProduct();
-                case 2 -> Utils.getProduct();
+                case 1 -> utils.listProduct();
+                case 2 -> utils.getProduct();
                 case 3 -> {
                     return;
                 }
@@ -147,10 +152,10 @@ public class Main {
 
             int choice = getChoice(5);
             switch (choice) {
-                case 1 -> Utils.addToCart(loggedInCustomer);
-                case 2 -> Utils.listCartItems();
-                case 3 -> Utils.updateCart();
-                case 4 -> Utils.removeFromCart();
+                case 1 -> utils.addToCart(loggedInCustomer);
+                case 2 -> utils.listCartItems();
+                case 3 -> utils.updateCart();
+                case 4 -> utils.removeFromCart();
                 case 5 -> {
                     return;
                 }
@@ -169,9 +174,9 @@ public class Main {
 
             int choice = getChoice(4);
             switch (choice) {
-                case 1 -> Utils.addToWishList(loggedInCustomer);
-                case 2 -> Utils.listWishItems();
-                case 3 -> Utils.removeFromWishList();
+                case 1 -> utils.addToWishList(loggedInCustomer);
+                case 2 -> utils.listWishItems();
+                case 3 -> utils.removeFromWishList();
                 case 4 -> {
                     return;
                 }

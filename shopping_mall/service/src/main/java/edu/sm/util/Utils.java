@@ -2,26 +2,50 @@ package edu.sm.util;
 
 import edu.sm.dto.*;
 import edu.sm.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+
+@Component
 public class Utils {
-    private static final CustomerService customerService = new CustomerService();
-    private static final AddressService addressService = new AddressService();
-    private static final BoardService boardService = new BoardService();
-    private static final CartService cartService = new CartService();
-    private static final DeliveryService deliveryService = new DeliveryService();
-    private static final MileageService mileageService = new MileageService();
-    private static final WishService wishService = new WishService();
+    private static Utils instance;
+    private final CustomerService customerService;
+    private final AddressService addressService;
+    private final BoardService boardService;
+    private final CartService cartService;
+    private final DeliveryService deliveryService;
+    private final MileageService mileageService;
+    private final WishService wishService;
+    private final ProductService productService;
     private static final Scanner scanner = new Scanner(System.in);
-    private static final ProductService productService = new ProductService();
+
+    @Autowired
+    private Utils(CustomerService customerService, AddressService addressService,
+                  BoardService boardService, CartService cartService,
+                  DeliveryService deliveryService, MileageService mileageService,
+                  WishService wishService, ProductService productService) {
+        this.customerService = customerService;
+        this.addressService = addressService;
+        this.boardService = boardService;
+        this.cartService = cartService;
+        this.deliveryService = deliveryService;
+        this.mileageService = mileageService;
+        this.wishService = wishService;
+        this.productService = productService;
+        instance = this;
+    }
+
+    public static Utils getInstance() {
+        return instance;
+    }
 
 
-
-    public static Customer registerCustomer() throws Exception {
+    public Customer registerCustomer() throws Exception {
         System.out.println("회원가입을 시작합니다.");
         System.out.print("사용자명: ");
         String username = scanner.nextLine();
@@ -58,7 +82,7 @@ public class Utils {
         return customer;
     }
 
-    public static Customer login() throws Exception {
+    public Customer login() throws Exception {
         System.out.println("로그인을 시작합니다.");
         System.out.print("사용자명: ");
         String username = scanner.nextLine();
@@ -75,12 +99,12 @@ public class Utils {
         System.out.println("로그인 실패. 사용자명 또는 비밀번호가 잘못되었습니다.");
         return null;
     }
-    public static void deleteCustomer(Customer customer) throws Exception {
+    public void deleteCustomer(Customer customer) throws Exception {
         customerService.remove(customer.getCustId());
         System.out.println("고객 계정이 삭제되었습니다.");
     }
 
-    public static Customer updateCustomerInfo(Customer customer) throws Exception {
+    public Customer updateCustomerInfo(Customer customer) throws Exception {
         System.out.println("회원 정보를 변경하지 않으려면 엔터를 누르세요..");
 
         System.out.print("새로운 사용자명 (현재: " + customer.getUsername() + "): ");
@@ -110,7 +134,7 @@ public class Utils {
         return customerService.modify(customer);
     }
 
-    private static Address registerAddress(Integer custId) throws Exception {
+    private Address registerAddress(Integer custId) throws Exception {
         System.out.println("배송지를 등록합니다.");
         System.out.print("받는 사람 이름: ");
         String name = scanner.nextLine();
@@ -139,7 +163,7 @@ public class Utils {
         return addressService.add(newAddress);
     }
 
-    public static void setDefaultAddress(Integer custId) throws Exception {
+    public void setDefaultAddress(Integer custId) throws Exception {
         System.out.print("기본 배송지로 설정할 주소 ID를 입력하세요: ");
         Integer addressId = Integer.parseInt(scanner.nextLine());
         addressService.setDefaultAddress(addressId, custId);
@@ -147,7 +171,7 @@ public class Utils {
     }
 
 
-    public static void addToCart(Customer customer) throws Exception {
+    public void addToCart(Customer customer) throws Exception {
         System.out.print("상품 ID를 입력하세요: ");
         Integer productId = Integer.parseInt(scanner.nextLine());
         System.out.print("수량을 입력하세요: ");
@@ -164,7 +188,7 @@ public class Utils {
         System.out.println("장바구니에 상품이 추가되었습니다.");
     }
 
-    public static void updateCart() throws Exception {
+    public void updateCart() throws Exception {
         System.out.print("수정할 장바구니 항목 ID를 입력하세요: ");
         Integer cartId = Integer.parseInt(scanner.nextLine());
         Cart cart = cartService.get(cartId);
@@ -172,20 +196,20 @@ public class Utils {
         cartService.modify(cart);
         System.out.println("장바구니 항목이 수정되었습니다.");
     }
-    public static void removeFromCart() throws Exception {
+    public void removeFromCart() throws Exception {
         System.out.print("삭제할 장바구니 항목 ID를 입력하세요: ");
         Integer cartId = Integer.parseInt(scanner.nextLine());
         cartService.remove(cartId);
         System.out.println("장바구니 항목이 삭제되었습니다.");
     }
 
-    public static void listCartItems() throws Exception {
+    public void listCartItems() throws Exception {
         List<Cart> cartItems = cartService.get();
         for (Cart cart : cartItems) {
             System.out.println(cart);
         }
     }
-    public static void addToWishList(Customer customer) throws Exception {
+    public void addToWishList(Customer customer) throws Exception {
         System.out.print("위시리스트에 추가할 상품 ID를 입력하세요: ");
         Integer productId = Integer.parseInt(scanner.nextLine());
 
@@ -199,7 +223,7 @@ public class Utils {
         System.out.println("위시리스트에 상품이 추가되었습니다.");
     }
 
-    public static void writeReview(Customer customer) throws Exception {
+    public void writeReview(Customer customer) throws Exception {
         System.out.print("리뷰를 작성할 상품 ID를 입력하세요: ");
         Integer productId = Integer.parseInt(scanner.nextLine());
         System.out.print("제목: ");
@@ -223,7 +247,7 @@ public class Utils {
         System.out.println("리뷰가 작성되었습니다.");
     }
 
-    public static void writeInquiry(Customer customer) throws Exception {
+    public void writeInquiry(Customer customer) throws Exception {
         System.out.print("문의할 상품 ID를 입력하세요: ");
         Integer productId = Integer.parseInt(scanner.nextLine());
         System.out.print("제목: ");
@@ -244,12 +268,12 @@ public class Utils {
         System.out.println("문의가 등록되었습니다.");
     }
 
-    public static void checkMileage(Customer customer) throws Exception {
+    public void checkMileage(Customer customer) throws Exception {
         Mileage mileage = mileageService.get(customer.getCustId());
         System.out.println("현재 마일리지: " + mileage.getBalance());
     }
 
-    public static void viewDeliveryStatus(Customer customer) throws Exception {
+    public void viewDeliveryStatus(Customer customer) throws Exception {
         System.out.print("배송 상태를 확인할 주문 ID를 입력하세요: ");
         Integer orderId = Integer.parseInt(scanner.nextLine());
         Delivery delivery = deliveryService.viewShippingStatus(orderId);
@@ -260,21 +284,21 @@ public class Utils {
         }
     }
 
-    public static void removeFromWishList() throws Exception {
+    public void removeFromWishList() throws Exception {
         System.out.print("삭제할 위시리스트 항목 ID를 입력하세요: ");
         Integer wishId = Integer.parseInt(scanner.nextLine());
         wishService.remove(wishId);
         System.out.println("위시리스트 항목이 삭제되었습니다.");
     }
 
-    public static void listWishItems() throws Exception {
+    public void listWishItems() throws Exception {
         List<Wish> wishItems = wishService.get();
         for (Wish wish : wishItems) {
             System.out.println(wish);
         }
     }
 
-    public static void listProduct() throws Exception {
+    public void listProduct() throws Exception {
         List<Product> products = productService.get();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -301,7 +325,7 @@ public class Utils {
     }
 
 
-    public static void getProduct() throws Exception {
+    public void getProduct() throws Exception {
         System.out.print("조회할 상품의 ID를 입력하세요: ");
         Integer productId = Integer.parseInt(scanner.nextLine());
         Product product = productService.get(productId);

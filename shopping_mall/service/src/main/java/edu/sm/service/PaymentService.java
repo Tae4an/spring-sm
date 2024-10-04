@@ -3,6 +3,7 @@ package edu.sm.service;
 import edu.sm.dao.PaymentDao;
 import edu.sm.dto.Payment;
 import edu.sm.frame.ConnectionPool;
+import edu.sm.frame.Dao;
 import edu.sm.frame.MService;
 
 import java.sql.Connection;
@@ -11,16 +12,12 @@ import java.util.List;
 
 public class PaymentService implements MService<Integer, Payment> {
 
-    PaymentDao dao;
+    Dao<Integer, Payment> dao;
     ConnectionPool cp;
 
-    public PaymentService() {
-        dao = new PaymentDao();
-        try {
-            cp = ConnectionPool.create();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public PaymentService(Dao<Integer, Payment> dao, ConnectionPool cp) {
+        this.dao = dao;
+        this.cp = cp;
     }
 
     @Override

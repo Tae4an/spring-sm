@@ -3,9 +3,30 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id ="custOracleRepository" class= "edu.sm.cust.repository.CustOracleRepository"> </bean>
-    <bean id ="custService" class= "edu.sm.cust.service.CustService">
-        <property name="repository" ref="custOracleRepository"/>
-<!--        <constructor-arg ref="custRepository"/>-->
-    </bean>
+
+    <bean id="connectionpool" class="edu.sm.frame.ConnectionPool" factory-method="create"></bean>
+
+    <bean id="addressdao" class="edu.sm.dao.AddressDao"></bean>
+
+    <bean id="boarddao" class="edu.sm.dao.BoardDao"></bean>
+
+    <bean id="cartdao" class="edu.sm.dao.CartDao"></bean>
+
+    <bean id="deliverydao" class="edu.sm.dao.DeliveryDao"></bean>
+
+    <bean id="mileagedao" class="edu.sm.dao.MileageDao"></bean>
+
+    <bean id="orderdao" class="edu.sm.dao.OrderDao"></bean>
+
+    <bean id="orderdetaildao" class="edu.sm.dao.OrderDetailDao"></bean>
+
+    <bean id="paymentdao" class="edu.sm.dao.PaymentDao"></bean>
+
+    <bean id="productdao" class="edu.sm.dao.ProductDao"></bean>
+
+    <bean id="usedmileagedao" class="edu.sm.dao.UsedMileageDao"></bean>
+
+    <bean id="wishdao" class="edu.sm.dao.WishDao"></bean>
+
+
 </beans>

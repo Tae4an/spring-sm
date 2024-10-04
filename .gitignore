@@ -1,0 +1,9 @@
+day01/target/*
+
+.idea/*
+
+/spring_sm.iml
+/day01-1/target/*
+/day01-2/target/*
+/shopping_mall/admin/target/*
+/shopping_mall/service/target/*

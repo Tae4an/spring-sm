@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Database Connection Pool -->
+    <bean id="connectionPool" class="edu.sm.frame.ConnectionPool" factory-method="create"/>
+
+    <!-- DAOs -->
+    <bean id="customerDao" class="edu.sm.dao.CustomerDao"/>
+    <bean id="addressDao" class="edu.sm.dao.AddressDao"/>
+    <bean id="productDao" class="edu.sm.dao.ProductDao"/>
+    <bean id="categoryDao" class="edu.sm.dao.CategoryDao"/>
+    <bean id="boardDao" class="edu.sm.dao.BoardDao"/>
+    <bean id="orderDao" class="edu.sm.dao.OrderDao"/>
+    <bean id="orderDetailDao" class="edu.sm.dao.OrderDetailDao"/>
+    <bean id="paymentDao" class="edu.sm.dao.PaymentDao"/>
+    <bean id="statisticsAnalysisDao" class="edu.sm.dao.StatisticsAnalysisDao"/>
+
+    <!-- Services -->
+    <bean id="customerService" class="edu.sm.service.CustomerService">
+        <constructor-arg ref="customerDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="addressService" class="edu.sm.service.AddressService">
+        <constructor-arg ref="addressDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="productService" class="edu.sm.service.ProductService">
+        <constructor-arg ref="productDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="categoryService" class="edu.sm.service.CategoryService">
+        <constructor-arg ref="categoryDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="boardService" class="edu.sm.service.BoardService">
+        <constructor-arg ref="boardDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="orderService" class="edu.sm.service.OrderService">
+        <constructor-arg ref="orderDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="orderDetailService" class="edu.sm.service.OrderDetailService">
+        <constructor-arg ref="orderDetailDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="paymentService" class="edu.sm.service.PaymentService">
+        <constructor-arg ref="paymentDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+
+
+    <!-- Utils -->
+    <bean id="utils" class="edu.sm.util.Utils">
+        <constructor-arg ref="customerService"/>
+        <constructor-arg ref="addressService"/>
+        <constructor-arg ref="productService"/>
+        <constructor-arg ref="categoryService"/>
+        <constructor-arg ref="boardService"/>
+        <constructor-arg ref="orderService"/>
+        <constructor-arg ref="orderDetailService"/>
+        <constructor-arg ref="paymentService"/>
+    </bean>
+
+</beans>

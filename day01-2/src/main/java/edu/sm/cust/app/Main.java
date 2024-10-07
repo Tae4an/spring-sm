@@ -13,6 +13,6 @@ public class Main {
                 new ClassPathXmlApplicationContext("spring.xml");
 
         SMService<String, Cust> service = (SMService<String, Cust>) factory.getBean("custService");
-        service.remove(" id-1");
+        service.remove(" id01");
     }
 }

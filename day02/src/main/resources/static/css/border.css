@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1 {
+    color: #333;
+    border-bottom: 3px solid #333;
+    padding-bottom: 10px;
+}
+.example {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+.box {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    display: inline-block;
+    background-color: #e0e0e0;
+    text-align: center;
+    line-height: 100px;
+}
+/* 기본 border 스타일 */
+.border-solid { border: 2px solid black; }
+.border-dotted { border: 2px dotted red; }
+.border-dashed { border: 2px dashed green; }
+.border-double { border: 4px double blue; }
+.border-groove { border: 5px groove gray; }
+.border-ridge { border: 5px ridge purple; }
+.border-inset { border: 5px inset orange; }
+.border-outset { border: 5px outset pink; }
+
+/* 두께 다른 border */
+.border-thick { border: 10px solid black; }
+.border-medium { border: 5px solid black; }
+.border-thin { border: 1px solid black; }
+
+/* 색상 다른 border */
+.border-colored { border: 3px solid; }
+.border-colored.red { border-color: red; }
+.border-colored.green { border-color: green; }
+.border-colored.blue { border-color: blue; }
+
+/* 개별 방향 border */
+.border-top { border-top: 3px solid red; }
+.border-right { border-right: 3px solid green; }
+.border-bottom { border-bottom: 3px solid blue; }
+.border-left { border-left: 3px solid orange; }
+
+/* 둥근 모서리 */
+.border-rounded { border: 2px solid black; border-radius: 10px; }
+.border-circle { border: 2px solid black; border-radius: 50%; }
+
+/* 그라데이션 border */
+.border-gradient {
+    border: 10px solid;
+    border-image: linear-gradient(to right, red, yellow, green, blue) 1;
+}
+
+/* 이미지 border */
+.border-image {
+    border: 15px solid;
+    border-image: url('/static/img/img.png') 30 round;
+}

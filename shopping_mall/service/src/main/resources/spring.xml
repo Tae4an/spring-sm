@@ -62,6 +62,16 @@
         <constructor-arg ref="connectionPool"/>
     </bean>
 
+    <bean id="orderService" class="edu.sm.service.OrderService">
+        <constructor-arg ref="orderDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
+    <bean id="orderDetailService" class="edu.sm.service.OrderDetailService">
+        <constructor-arg ref="orderdetailDao"/>
+        <constructor-arg ref="connectionPool"/>
+    </bean>
+
     <!-- Utils bean -->
     <bean id="utils" class="edu.sm.util.Utils">
         <constructor-arg ref="customerService"/>
@@ -72,6 +82,8 @@
         <constructor-arg ref="mileageService"/>
         <constructor-arg ref="wishService"/>
         <constructor-arg ref="productService"/>
+        <constructor-arg ref="orderService"/>
+        <constructor-arg ref="orderDetailService"/>
     </bean>
 
 </beans>

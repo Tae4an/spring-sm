@@ -58,8 +58,10 @@ public class Main {
             System.out.println("4. 위시리스트");
             System.out.println("5. 상품 리뷰");
             System.out.println("6. 문의 등록");
-            System.out.println("7. 로그아웃");
-            System.out.println("8. 종료");
+            System.out.println("7. 주문 관리");
+            System.out.println("8. 주문 상세 관리");
+            System.out.println("9. 로그아웃");
+            System.out.println("10. 종료");
             System.out.print("선택: ");
 
             int choice = getChoice(8);
@@ -71,12 +73,14 @@ public class Main {
                     case 4 -> handleWishlistMenu();
                     case 5 -> utils.writeReview(loggedInCustomer);
                     case 6 -> utils.writeInquiry(loggedInCustomer);
-                    case 7 -> {
+                    case 7 -> handleOrderMenu();
+                    case 8 -> handleOrderDetailMenu();
+                    case 9 -> {
                         System.out.println("로그아웃 되었습니다.");
                         loggedInCustomer = null;
                         return;
                     }
-                    case 8 -> {
+                    case 10 -> {
                         System.out.println("프로그램을 종료합니다.");
                         System.exit(0);
                     }
@@ -198,4 +202,55 @@ public class Main {
             }
         }
     }
+
+    private static void handleOrderMenu() throws Exception {
+        while (true) {
+            System.out.println("\n=== 주문 관리 ===");
+            System.out.println("1. 새 주문 생성");
+            System.out.println("2. 주문 조회");
+            System.out.println("3. 주문 수정");
+            System.out.println("4. 주문 삭제");
+            System.out.println("5. 전체 주문 목록");
+            System.out.println("6. 이전 메뉴로");
+            System.out.print("선택: ");
+
+            int choice = getChoice(6);
+            switch (choice) {
+                case 1 -> utils.createOrder(loggedInCustomer);
+                case 2 -> utils.viewOrder();
+                case 3 -> utils.updateOrder();
+                case 4 -> utils.deleteOrder();
+                case 5 -> utils.listAllOrders();
+                case 6 -> {
+                    return;
+                }
+            }
+        }
+    }
+
+    private static void handleOrderDetailMenu() throws Exception {
+        while (true) {
+            System.out.println("\n=== 주문 상세 관리 ===");
+            System.out.println("1. 새 주문 상세 생성");
+            System.out.println("2. 주문 상세 조회");
+            System.out.println("3. 주문 상세 수정");
+            System.out.println("4. 주문 상세 삭제");
+            System.out.println("5. 전체 주문 상세 목록");
+            System.out.println("6. 이전 메뉴로");
+            System.out.print("선택: ");
+
+            int choice = getChoice(6);
+            switch (choice) {
+                case 1 -> utils.createOrderDetail();
+                case 2 -> utils.viewOrderDetail();
+                case 3 -> utils.updateOrderDetail();
+                case 4 -> utils.deleteOrderDetail();
+                case 5 -> utils.listAllOrderDetails();
+                case 6 -> {
+                    return;
+                }
+            }
+        }
+    }
+
 }

@@ -22,13 +22,16 @@ public class Utils {
     private final MileageService mileageService;
     private final WishService wishService;
     private final ProductService productService;
+    private final OrderService orderService;
+    private final OrderDetailService orderDetailService;
     private static final Scanner scanner = new Scanner(System.in);
 
     @Autowired
     private Utils(CustomerService customerService, AddressService addressService,
                   BoardService boardService, CartService cartService,
                   DeliveryService deliveryService, MileageService mileageService,
-                  WishService wishService, ProductService productService) {
+                  WishService wishService, ProductService productService, OrderService orderService,
+                  OrderDetailService orderDetailService) {
         this.customerService = customerService;
         this.addressService = addressService;
         this.boardService = boardService;
@@ -37,6 +40,8 @@ public class Utils {
         this.mileageService = mileageService;
         this.wishService = wishService;
         this.productService = productService;
+        this.orderService = orderService;
+        this.orderDetailService = orderDetailService;
         instance = this;
     }
 
@@ -262,6 +267,7 @@ public class Utils {
                 .title(title)
                 .regDate(new Date())
                 .content(content)
+                .rate(0)
                 .build();
 
         boardService.add(inquiry);
@@ -359,4 +365,230 @@ public class Utils {
             System.out.println("\n상품을 찾을 수 없습니다.");
         }
     }
+
+    public Order createOrder(Customer customer) throws Exception {
+        System.out.println("새 주문 생성");
+        System.out.print("상품 개수: ");
+        int productCount = Integer.parseInt(scanner.nextLine());
+        System.out.print("총 가격: ");
+        int totalPrice = Integer.parseInt(scanner.nextLine());
+        System.out.print("이름: ");
+        String name = scanner.nextLine();
+        System.out.print("전화번호: ");
+        String phone = scanner.nextLine();
+        System.out.print("주소1: ");
+        String address1 = scanner.nextLine();
+        System.out.print("주소2: ");
+        String address2 = scanner.nextLine();
+        System.out.print("우편번호: ");
+        String zipCode = scanner.nextLine();
+        System.out.print("요청사항: ");
+        String request = scanner.nextLine();
+        System.out.print("카드: ");
+        String card = scanner.nextLine();
+        System.out.print("사용 마일리지: ");
+        int usedMileage = Integer.parseInt(scanner.nextLine());
+
+        Order order = Order.builder()
+                .custId(customer.getCustId())
+                .productCount(productCount)
+                .price(totalPrice)
+                .orderDate(new Date())
+                .name(name)
+                .phone(phone)
+                .address1(address1)
+                .address2(address2)
+                .zipCode(zipCode)
+                .request(request)
+                .card(card)
+                .usedMileage(usedMileage)
+                .build();
+
+        order = orderService.add(order);
+        System.out.println("새 주문이 생성되었습니다. 주문 ID: " + order.getOrderId());
+
+        // 주문 상세 정보 추가
+        for (int i = 0; i < productCount; i++) {
+            System.out.println("주문 상세 " + (i + 1) + " 입력:");
+            System.out.print("상품 ID: ");
+            int productId = Integer.parseInt(scanner.nextLine());
+            System.out.print("가격: ");
+            int price = Integer.parseInt(scanner.nextLine());
+            System.out.print("수량: ");
+            int count = Integer.parseInt(scanner.nextLine());
+
+            OrderDetail orderDetail = OrderDetail.builder()
+                    .productId(productId)
+                    .orderId(order.getOrderId())
+                    .price(price)
+                    .count(count)
+                    .build();
+
+            orderDetailService.add(orderDetail);
+        }
+
+        return order;
+    }
+
+    // 주문 조회 메서드
+    public void viewOrder() throws Exception {
+        System.out.print("조회할 주문 ID: ");
+        int orderId = Integer.parseInt(scanner.nextLine());
+        Order order = orderService.get(orderId);
+        if (order != null) {
+            System.out.println("주문 정보:");
+            System.out.println(order);
+
+            System.out.println("주문 상세 정보:");
+            List<OrderDetail> orderDetails = orderDetailService.get();
+            for (OrderDetail detail : orderDetails) {
+                if (detail.getOrderId().equals(orderId)) {
+                    System.out.println(detail);
+                }
+            }
+        } else {
+            System.out.println("주문을 찾을 수 없습니다.");
+        }
+    }
+
+    // 주문 수정 메서드
+    public Order updateOrder() throws Exception {
+        System.out.print("수정할 주문 ID: ");
+        int orderId = Integer.parseInt(scanner.nextLine());
+        Order order = orderService.get(orderId);
+        if (order != null) {
+            System.out.println("현재 주문 정보: " + order);
+            System.out.println("수정할 필드를 입력하세요. 수정하지 않을 경우 Enter를 누르세요.");
+
+            System.out.print("상품 개수 (" + order.getProductCount() + "): ");
+            String input = scanner.nextLine();
+            if (!input.isEmpty()) {
+                order.setProductCount(Integer.parseInt(input));
+            }
+
+            // ... (다른 필드들에 대해서도 비슷하게 구현)
+
+            return orderService.modify(order);
+        } else {
+            System.out.println("주문을 찾을 수 없습니다.");
+            return null;
+        }
+    }
+
+    // 주문 삭제 메서드
+    public boolean deleteOrder() throws Exception {
+        System.out.print("삭제할 주문 ID: ");
+        int orderId = Integer.parseInt(scanner.nextLine());
+
+        // 먼저 관련된 주문 상세 정보 삭제
+        List<OrderDetail> orderDetails = orderDetailService.get();
+        for (OrderDetail detail : orderDetails) {
+            if (detail.getOrderId().equals(orderId)) {
+                orderDetailService.remove(detail.getOrderDetailId());
+            }
+        }
+
+        // 주문 삭제
+        boolean deleted = orderService.remove(orderId);
+        if (deleted) {
+            System.out.println("주문과 관련 주문 상세 정보가 삭제되었습니다.");
+        } else {
+            System.out.println("주문을 삭제할 수 없습니다.");
+        }
+        return deleted;
+    }
+
+    // 전체 주문 목록 조회 메서드
+    public void listAllOrders() throws Exception {
+        List<Order> orders = orderService.get();
+        if (orders.isEmpty()) {
+            System.out.println("주문이 없습니다.");
+        } else {
+            for (Order order : orders) {
+                System.out.println(order);
+            }
+        }
+    }
+
+    // 새로운 주문 상세 생성 메서드
+    public OrderDetail createOrderDetail() throws Exception {
+        System.out.println("새 주문 상세 생성");
+        System.out.print("상품 ID: ");
+        int productId = Integer.parseInt(scanner.nextLine());
+        System.out.print("주문 ID: ");
+        int orderId = Integer.parseInt(scanner.nextLine());
+        System.out.print("가격: ");
+        int price = Integer.parseInt(scanner.nextLine());
+        System.out.print("수량: ");
+        int count = Integer.parseInt(scanner.nextLine());
+
+        OrderDetail orderDetail = OrderDetail.builder()
+                .productId(productId)
+                .orderId(orderId)
+                .price(price)
+                .count(count)
+                .build();
+
+        return orderDetailService.add(orderDetail);
+    }
+
+    // 주문 상세 조회 메서드
+    public void viewOrderDetail() throws Exception {
+        System.out.print("조회할 주문 상세 ID: ");
+        int orderDetailId = Integer.parseInt(scanner.nextLine());
+        OrderDetail orderDetail = orderDetailService.get(orderDetailId);
+        if (orderDetail != null) {
+            System.out.println(orderDetail);
+        } else {
+            System.out.println("주문 상세를 찾을 수 없습니다.");
+        }
+    }
+
+    // 주문 상세 수정 메서드
+    public OrderDetail updateOrderDetail() throws Exception {
+        System.out.print("수정할 주문 상세 ID: ");
+        int orderDetailId = Integer.parseInt(scanner.nextLine());
+        OrderDetail orderDetail = orderDetailService.get(orderDetailId);
+        if (orderDetail != null) {
+            System.out.println("현재 주문 상세 정보: " + orderDetail);
+            System.out.println("수정할 필드를 입력하세요. 수정하지 않을 경우 Enter를 누르세요.");
+
+            System.out.print("가격 (" + orderDetail.getPrice() + "): ");
+            String input = scanner.nextLine();
+            if (!input.isEmpty()) {
+                orderDetail.setPrice(Integer.parseInt(input));
+            }
+
+            System.out.print("수량 (" + orderDetail.getCount() + "): ");
+            input = scanner.nextLine();
+            if (!input.isEmpty()) {
+                orderDetail.setCount(Integer.parseInt(input));
+            }
+
+            return orderDetailService.modify(orderDetail);
+        } else {
+            System.out.println("주문 상세를 찾을 수 없습니다.");
+            return null;
+        }
+    }
+
+    // 주문 상세 삭제 메서드
+    public boolean deleteOrderDetail() throws Exception {
+        System.out.print("삭제할 주문 상세 ID: ");
+        int orderDetailId = Integer.parseInt(scanner.nextLine());
+        return orderDetailService.remove(orderDetailId);
+    }
+
+    // 전체 주문 상세 목록 조회 메서드
+    public void listAllOrderDetails() throws Exception {
+        List<OrderDetail> orderDetails = orderDetailService.get();
+        if (orderDetails.isEmpty()) {
+            System.out.println("주문 상세가 없습니다.");
+        } else {
+            for (OrderDetail orderDetail : orderDetails) {
+                System.out.println(orderDetail);
+            }
+        }
+    }
+
 }

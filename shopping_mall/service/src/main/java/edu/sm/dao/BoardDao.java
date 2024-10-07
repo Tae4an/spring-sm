@@ -23,7 +23,7 @@ public class BoardDao implements Dao<Integer, Board> {
             pstmt.setDate(5, new Date(board.getRegDate().getTime()));
             pstmt.setString(6, board.getContent());
             pstmt.setString(7, board.getImg());
-            pstmt.setInt(8, board.getRate());
+            pstmt.setInt(8, board.getRate() != null ? board.getRate() : 0);
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {

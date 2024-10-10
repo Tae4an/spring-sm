@@ -20,6 +20,9 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value="/js/js5"/>">js5</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/js/js6"/>">js6</a>
+        </li>
     </ul>
     <hr class="d-sm-none">
 </div>

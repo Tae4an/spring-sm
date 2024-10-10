@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -46,10 +48,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/js" /> ">JS</a>
+                <a class="nav-link" href="<c:url value="/js" /> "><i class="fas fa-code mr-1"></i>JS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/ajax"/> ">AJAX</a>
+                <a class="nav-link" href="<c:url value="/ajax"/> "><i class="fas fa-exchange-alt mr-1"></i>AJAX</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/map"/> ">Map</a>

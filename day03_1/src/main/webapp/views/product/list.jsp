@@ -1,6 +1,58 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function display(products) {
+        let result = '';
+        $(products).each(function (index, product) {
+            result += '<tr>';
+            result += '<td><img src="' + product.img + '" alt="' + product.name + '" class="product-image"></td>';
+            result += '<td>' + product.category + '</td>';
+            result += '<td>' + product.name + '</td>';
+            result += '<td>' + product.price.toLocaleString() + '원</td>';
+            result += '<td>' + product.regDate + '</td>';
+            result += '<td>' + product.description + '</td>';
+            result += '<td>' + product.count + '</td>';
+            result += '<td>' + (product.isPublic ? '공개' : '비공개') + '</td>';
+            result += '<td class="action-links">';
+            result += '<a href="editProduct?id=' + product.id + '">수정</a> ';
+            result += '<a href="deleteProduct?id=' + product.id + '" onclick="return confirm(\'정말로 삭제하시겠습니까?\');">삭제</a>';
+            result += '</td>';
+            result += '</tr>';
+        });
+        $('#product_data > tbody').html(result);
+    };
+
+    function getProductData() {
+        let products = [
+            {id: 1, category: '스마트폰', name: '아이폰 15', price: 1200000, regDate: '2024-08-01', description: '애플 스마트폰', img: 'iphone15.jpg', count: 100, isPublic: true},
+            {id: 2, category: '스마트폰', name: '갤럭시 S24', price: 1300000, regDate: '2024-08-02', description: '삼성 스마트폰', img: 'galaxys24.jpg', count: 90, isPublic: true},
+            {id: 3, category: '노트북', name: '맥북 프로', price: 2500000, regDate: '2024-08-03', description: '애플의 고성능 노트북', img: 'macbookpro.jpg', count: 50, isPublic: true},
+            {id: 4, category: '노트북', name: '갤럭시북', price: 1800000, regDate: '2024-08-04', description: '삼성 프리미엄 노트북', img: 'galaxybook.jpg', count: 60, isPublic: true},
+            {id: 5, category: '태블릿', name: '아이패드 프로', price: 1000000, regDate: '2024-08-05', description: '애플의 프로급 태블릿', img: 'ipadpro.jpg', count: 70, isPublic: true},
+            {id: 6, category: '스마트워치', name: '애플워치', price: 500000, regDate: '2024-08-06', description: '애플의 스마트워치', img: 'applewatch.jpg', count: 80, isPublic: true},
+            {id: 7, category: '스마트워치', name: '갤럭시워치', price: 400000, regDate: '2024-08-07', description: '삼성의 스마트워치', img: 'galaxywatch.jpg', count: 85, isPublic: true},
+            {id: 8, category: 'TV', name: 'OLED TV', price: 2000000, regDate: '2024-08-08', description: '최신 OLED TV', img: 'oledtv.jpg', count: 30, isPublic: true},
+            {id: 9, category: '냉장고', name: '양문형 냉장고', price: 1500000, regDate: '2024-08-09', description: '대용량 양문형 냉장고', img: 'refrigerator.jpg', count: 40, isPublic: true},
+            {id: 10, category: '세탁기', name: '드럼 세탁기', price: 800000, regDate: '2024-08-10', description: '저소음 드럼 세탁기', img: 'washer.jpg', count: 45, isPublic: true},
+            {id: 11, category: '의류', name: '여름용 티셔츠', price: 30000, regDate: '2024-08-11', description: '시원한 소재의 티셔츠', img: 'tshirt.jpg', count: 200, isPublic: true},
+            {id: 12, category: '신발', name: '런닝화', price: 120000, regDate: '2024-08-12', description: '편안한 러닝화', img: 'runningshoes.jpg', count: 150, isPublic: true},
+            {id: 13, category: '액세서리', name: '선글라스', price: 80000, regDate: '2024-08-13', description: 'UV 차단 선글라스', img: 'sunglasses.jpg', count: 100, isPublic: true},
+            {id: 14, category: '소설', name: '해리포터 시리즈', price: 150000, regDate: '2024-08-14', description: '해리포터 시리즈 전집', img: 'harrypotter.jpg', count: 50, isPublic: true},
+            {id: 15, category: '자기계발', name: '아톰의 습관', price: 18000, regDate: '2024-08-15', description: '습관 개선 자기계발서', img: 'atomichabits.jpg', count: 100, isPublic: true},
+            {id: 16, category: '과학', name: '코스모스', price: 25000, regDate: '2024-08-16', description: '칼 세이건의 우주과학 명저', img: 'cosmos.jpg', count: 80, isPublic: true}
+        ];
+        display(products);
+    };
+
+    $(document).ready(function () {
+        $('#btn_get').click(function () {
+            getProductData();
+        });
+    });
+</script>
+
 <style>
     h1 { color: #333; }
     .search-form { max-width: 400px; margin: 0 auto 20px; }
@@ -12,251 +64,23 @@
     .product-image { width: 50px; height: 50px; object-fit: cover; }
 </style>
 
-<h1>상품 목록</h1>
-
-<form class="search-form" action="searchProduct" method="get">
-    <input type="text" name="keyword" placeholder="상품명으로 검색" required>
-    <input type="submit" value="검색">
-</form>
-
-<table>
-    <thead>
-    <tr>
-        <th>이미지</th>
-        <th>카테고리</th>
-        <th>상품명</th>
-        <th>가격</th>
-        <th>등록일</th>
-        <th>설명</th>
-        <th>재고</th>
-        <th>공개 여부</th>
-        <th>작업</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><img src="iphone15.jpg" alt="아이폰 15" class="product-image"></td>
-        <td>스마트폰</td>
-        <td>아이폰 15</td>
-        <td>1,200,000원</td>
-        <td>2024-08-01</td>
-        <td>애플 스마트폰</td>
-        <td>100</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=1">수정</a>
-            <a href="deleteProduct?id=1" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="galaxys24.jpg" alt="갤럭시 S24" class="product-image"></td>
-        <td>스마트폰</td>
-        <td>갤럭시 S24</td>
-        <td>1,300,000원</td>
-        <td>2024-08-02</td>
-        <td>삼성 스마트폰</td>
-        <td>90</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=2">수정</a>
-            <a href="deleteProduct?id=2" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="macbookpro.jpg" alt="맥북 프로" class="product-image"></td>
-        <td>노트북</td>
-        <td>맥북 프로</td>
-        <td>2,500,000원</td>
-        <td>2024-08-03</td>
-        <td>애플의 고성능 노트북</td>
-        <td>50</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=3">수정</a>
-            <a href="deleteProduct?id=3" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="galaxybook.jpg" alt="갤럭시북" class="product-image"></td>
-        <td>노트북</td>
-        <td>갤럭시북</td>
-        <td>1,800,000원</td>
-        <td>2024-08-04</td>
-        <td>삼성 프리미엄 노트북</td>
-        <td>60</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=4">수정</a>
-            <a href="deleteProduct?id=4" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="ipadpro.jpg" alt="아이패드 프로" class="product-image"></td>
-        <td>태블릿</td>
-        <td>아이패드 프로</td>
-        <td>1,000,000원</td>
-        <td>2024-08-05</td>
-        <td>애플의 프로급 태블릿</td>
-        <td>70</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=5">수정</a>
-            <a href="deleteProduct?id=5" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="applewatch.jpg" alt="애플워치" class="product-image"></td>
-        <td>스마트워치</td>
-        <td>애플워치</td>
-        <td>500,000원</td>
-        <td>2024-08-06</td>
-        <td>애플의 스마트워치</td>
-        <td>80</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=6">수정</a>
-            <a href="deleteProduct?id=6" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="galaxywatch.jpg" alt="갤럭시워치" class="product-image"></td>
-        <td>스마트워치</td>
-        <td>갤럭시워치</td>
-        <td>400,000원</td>
-        <td>2024-08-07</td>
-        <td>삼성의 스마트워치</td>
-        <td>85</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=7">수정</a>
-            <a href="deleteProduct?id=7" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="oledtv.jpg" alt="OLED TV" class="product-image"></td>
-        <td>TV</td>
-        <td>OLED TV</td>
-        <td>2,000,000원</td>
-        <td>2024-08-08</td>
-        <td>최신 OLED TV</td>
-        <td>30</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=8">수정</a>
-            <a href="deleteProduct?id=8" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="refrigerator.jpg" alt="양문형 냉장고" class="product-image"></td>
-        <td>냉장고</td>
-        <td>양문형 냉장고</td>
-        <td>1,500,000원</td>
-        <td>2024-08-09</td>
-        <td>대용량 양문형 냉장고</td>
-        <td>40</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=9">수정</a>
-            <a href="deleteProduct?id=9" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="washer.jpg" alt="드럼 세탁기" class="product-image"></td>
-        <td>세탁기</td>
-        <td>드럼 세탁기</td>
-        <td>800,000원</td>
-        <td>2024-08-10</td>
-        <td>저소음 드럼 세탁기</td>
-        <td>45</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=10">수정</a>
-            <a href="deleteProduct?id=10" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="tshirt.jpg" alt="여름용 티셔츠" class="product-image"></td>
-        <td>의류</td>
-        <td>여름용 티셔츠</td>
-        <td>30,000원</td>
-        <td>2024-08-11</td>
-        <td>시원한 소재의 티셔츠</td>
-        <td>200</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=11">수정</a>
-            <a href="deleteProduct?id=11" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="runningshoes.jpg" alt="런닝화" class="product-image"></td>
-        <td>신발</td>
-        <td>런닝화</td>
-        <td>120,000원</td>
-        <td>2024-08-12</td>
-        <td>편안한 러닝화</td>
-        <td>150</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=12">수정</a>
-            <a href="deleteProduct?id=12" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="sunglasses.jpg" alt="선글라스" class="product-image"></td>
-        <td>액세서리</td>
-        <td>선글라스</td>
-        <td>80,000원</td>
-        <td>2024-08-13</td>
-        <td>UV 차단 선글라스</td>
-        <td>100</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=13">수정</a>
-            <a href="deleteProduct?id=13" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="harrypotter.jpg" alt="해리포터 시리즈" class="product-image"></td>
-        <td>소설</td>
-        <td>해리포터 시리즈</td>
-        <td>150,000원</td>
-        <td>2024-08-14</td>
-        <td>해리포터 시리즈 전집</td>
-        <td>50</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=14">수정</a>
-            <a href="deleteProduct?id=14" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="atomichabits.jpg" alt="아톰의 습관" class="product-image"></td>
-        <td>자기계발</td>
-        <td>아톰의 습관</td>
-        <td>18,000원</td>
-        <td>2024-08-15</td>
-        <td>습관 개선 자기계발서</td>
-        <td>100</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=15">수정</a>
-            <a href="deleteProduct?id=15" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="cosmos.jpg" alt="코스모스" class="product-image"></td>
-        <td>과학</td>
-        <td>코스모스</td>
-        <td>25,000원</td>
-        <td>2024-08-16</td>
-        <td>칼 세이건의 우주과학 명저</td>
-        <td>80</td>
-        <td>공개</td>
-        <td class="action-links">
-            <a href="editProduct?id=16">수정</a>
-            <a href="deleteProduct?id=16" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="col-sm-10">
+    <h1>상품 목록</h1>
+    <button id="btn_get">상품 데이터 가져오기</button>
+    <table class="table" id="product_data">
+        <thead class="thead-dark">
+        <tr>
+            <th>이미지</th>
+            <th>카테고리</th>
+            <th>상품명</th>
+            <th>가격</th>
+            <th>등록일</th>
+            <th>설명</th>
+            <th>재고</th>
+            <th>공개 여부</th>
+            <th>작업</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

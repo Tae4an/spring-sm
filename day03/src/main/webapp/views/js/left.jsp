@@ -14,6 +14,12 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value="/js/js3"/>">js3</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/js/js4"/>">js4</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/js/js5"/>">js5</a>
+        </li>
     </ul>
     <hr class="d-sm-none">
 </div>

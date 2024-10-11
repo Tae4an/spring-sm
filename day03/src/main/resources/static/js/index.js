@@ -113,7 +113,36 @@ let js6 = {
     },
     send: function(){
         $('#signup_form').attr('method', 'post');
-        $('#signup_form').attr('action', '/signupimpl');
+        $('#signup_form').attr('action', '/signup_impl');
         $('#signup_form').submit();
+    }
+};
+let login = {
+    init:function(){
+        $('#login_form > button').click(()=>{
+            this.check();
+        });
+    },
+    check:function(){
+        let id = $('#id').val();
+        let pwd = $('#pwd').val();
+        if(id == '' || id == null){
+            alert('Id is Mandatory');
+            $('#id').focus();
+            return;
+        }
+        if(pwd == '' || pwd == null){
+            alert('Pwd is Mandatory');
+            $('#pwd').focus();
+            return;
+        }
+        this.send();
+    },
+    send:function(){
+        // method, action
+        $('#login_form').attr('method','post');
+
+        $('#login_form').attr('action','/login_impl');
+        $('#login_form').submit();
     }
 };

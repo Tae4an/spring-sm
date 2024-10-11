@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -27,18 +28,28 @@
     <p>Resize this responsive page to see the effect!</p>
 </div>
 <ul class="nav justify-content-end">
-    <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/login"/> ">Login</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/register"/>">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/about"/>">About us</a>
-    </li>
-    <%--    <li class="nav-item">--%>
-    <%--        <a class="nav-link disabled" href="#">Disabled</a>--%>
-    <%--    </li>--%>
+    <c:choose>
+        <c:when test="${sessionScope.loginid == null}">
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/login"/> ">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/register"/>">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/about"/>">About us</a>
+            </li>
+        </c:when>
+        <c:otherwise>
+            <li class="nav-item">
+                <a class="nav-link" href="#">${sessionScope.loginid}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/logout_impl"/>">Logout</a>
+            </li>
+        </c:otherwise>
+    </c:choose>
+
 </ul>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <a class="navbar-brand" href="<c:url value="/" /> ">Navbar</a>
@@ -59,6 +70,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/chart"/> ">Chart</a>
             </li>
+            <c:if test="${sessionScope.loginid != null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/cust"/> ">Cust</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/item"/> ">Item</a>
+                </li>
+            </c:if>
+
         </ul>
     </div>
 </nav>

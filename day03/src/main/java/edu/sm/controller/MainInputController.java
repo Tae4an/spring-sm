@@ -1,5 +1,6 @@
 package edu.sm.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,19 +11,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class MainInputController {
 
-    @RequestMapping("/loginimpl")
-    public String loginimpl(
+    @RequestMapping("/logout_impl")
+    public String logoutImpl(HttpSession session, Model model) {
+        if(session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping("/login_impl")
+    public String loginImpl(
             Model model,
             @RequestParam("id") String id,
-            @RequestParam("pwd") String pwd
+            @RequestParam("pwd") String pwd,
+            HttpSession session
     ) {
 
         log.info("ID:{}", id);
         log.info("PWD:{}", pwd);
 
-        return "index";
+        if (id.equals("aaa") && pwd.equals("111")){
+            session.setAttribute("loginid", id);
+            return "redirect:/";
+        }else {
+            model.addAttribute("center","login");
+            model.addAttribute("error", "Invalid ID or Password");
+            return "index";
+        }
     }
-    @RequestMapping("/signupimpl")
+    @RequestMapping("/signup_impl")
     public String signupimpl(
             Model model,
             @RequestParam("id") String id,

@@ -3,17 +3,17 @@
 
 <div class="col-sm-2">
 
-    <h3>Some Links</h3>
-    <p>Lorem ipsum dolor sit ame.</p>
+    <h3>I want home</h3>
+    <p>I am hungry..</p>
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">Active</a>
+            <a class="nav-link" href="#">집</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">가고</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">싶다</a>
         </li>
 
     </ul>

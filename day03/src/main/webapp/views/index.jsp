@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>Bootstrap 4 Website Example</title>
+    <title>2024년 몰입형 SW 정규과정 실습</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -14,20 +14,19 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d2ca8e15764aac3b60faca46633851f"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d2ca8e15764aac3b60faca46633851f&libraries=services"></script>
 
     <style>
-        .fakeimg {
-            height: 200px;
-            background: #aaa;
+        #back_img{
+            width: auto;
+            height: 400px;
         }
     </style>
 </head>
 <body>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-    <h1>My First Bootstrap 4 Page</h1>
-    <p>Resize this responsive page to see the effect!</p>
+<div class="jumbotron text-center" style="margin-bottom:0; background-color: #3e5570; color: #FFFFFF">
+    <h1>2024년 몰입형 SW 정규과정 실습</h1>
 </div>
 <ul class="nav justify-content-end">
     <c:choose>

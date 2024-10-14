@@ -14,6 +14,12 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value="/map/map3"/>">map3</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/map/map4"/>">map4</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/map/map3"/>">map5</a>
+        </li>
 
     </ul>
     <hr class="d-sm-none">

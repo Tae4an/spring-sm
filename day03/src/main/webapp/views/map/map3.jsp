@@ -84,9 +84,9 @@
         map3.init();
     });
 </script>
-<div class="col-sm-10">
+<div class="col-sm-9">
 
-    <h2>map3 Page</h2>
+    <h2>Map3 Page</h2>
     <button id="sbtn">Seoul</button>
     <button id="bbtn">Busan</button>
     <button id="jbtn">Jeju</button>

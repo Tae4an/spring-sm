@@ -10,22 +10,21 @@
 <script>
     let map2 = {
         init:function(){
-            this.makemap(37.554472, 126.980841,'남산','s1.jpg',100);
-
-            $('#sbtn').click(()=>{
-                // 37.554472, 126.980841
-                this.makemap(37.554472, 126.980841,'남산','s1.jpg',100);
+            this.makeMap(36.799165, 127.074981,'선문대학교','sm.jpg',400);
+            // 37.554472, 126.980841
+            $('#sbtn').click(() => {
+                this.makeMap(37.554472, 126.980841, '롯데월드', 'lt.jpg', 100);
             });
-            $('#bbtn').click(()=>{
-                // 35.175109, 129.175474
-                this.makemap(35.175109, 129.175474,'해운대','s2.jpg',200);
+            // 35.175109, 129.175474
+            $('#bbtn').click(() => {
+                this.makeMap(35.175109, 129.175474, '광안대교', 'bu.jpg', 200);
             });
-            $('#jbtn').click(()=>{
-                // 33.254564, 126.560944
-                this.makemap(33.254564, 126.560944,'서귀포','s3.jpg',300);
+            // 33.254564, 126.560944
+            $('#jbtn').click(() => {
+                this.makeMap(33.254564, 126.560944, '서귀포', 'udo.jpg', 300);
             });
         },
-        makemap:function(lat,lng,title, img, target){
+        makeMap:function(lat,lng,title, img, target){
             let mapContainer = document.getElementById('map');
             let mapOption = {
                 center: new kakao.maps.LatLng(lat, lng),
@@ -144,7 +143,7 @@
         map2.init();
     });
 </script>
-<div class="col-sm-10">
+<div class="col-sm-9">
 
     <h2>Map2 Page</h2>
     <button id="sbtn">Seoul</button>

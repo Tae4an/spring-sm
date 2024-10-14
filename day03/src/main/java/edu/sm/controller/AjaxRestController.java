@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -19,25 +20,39 @@ import java.util.Random;
 @Slf4j
 public class AjaxRestController {
     @RequestMapping("/getctime")
-    public Object getctime(){
+    public Object getctime() {
         JSONObject obj = new JSONObject();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        obj.put("ctime",formatter.format(now));
+        obj.put("ctime", formatter.format(now));
         return obj;
     }
+
     @RequestMapping("/getprank")
-    public Object prank(){
+    public Object prank() {
         JSONArray arr = new JSONArray();
         Random random = new Random();
         for (int i = 10; i < 16; i++) {
             JSONObject obj = new JSONObject();
-            obj.put("id", i-9);
-            obj.put("name", "아이폰"+i);
-            obj.put("price", random.nextInt(10000, 10000000)+1);
+            obj.put("id", i - 9);
+            obj.put("name", "아이폰" + i);
+            obj.put("price", random.nextInt(10000, 10000000) + 1);
             arr.add(obj);
         }
         return arr.get(random.nextInt(arr.size()));
 
+    }
+
+    @RequestMapping("/check_id")
+    public Object getId(
+            @RequestParam("r_id") String id
+    ) {
+        JSONObject obj = new JSONObject();
+        if (id.equals("qqqq") || id.equals("qqqqq")) {
+            obj.put("result", "1");
+        } else {
+            obj.put("result", "0");
+        }
+        return obj;
     }
 }

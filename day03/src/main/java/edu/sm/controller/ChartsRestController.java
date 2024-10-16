@@ -1,14 +1,11 @@
 package edu.sm.controller;
 
+import edu.sm.service.RandomDataGenerator;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.Random;
 
 @RestController
@@ -159,4 +156,28 @@ public class ChartsRestController {
 
         return arr;
     }
+
+    private String latestData;
+
+    @GetMapping("/getData")
+    @ResponseBody
+    public String getData() {
+        try {
+            // RandomDataGenerator를 호출하여 데이터 생성 및 전송
+            RandomDataGenerator.generateAndSendData();
+
+            return this.latestData;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error generating data";
+        }
+    }
+
+    @PostMapping("/receive")
+    @ResponseBody
+    public void receiveData(@RequestBody String jsonData) {
+        this.latestData = jsonData;
+        log.info("Random Data:{}", latestData);
+    }
+
 }

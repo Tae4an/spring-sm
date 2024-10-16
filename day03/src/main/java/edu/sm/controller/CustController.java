@@ -1,7 +1,7 @@
 
 package edu.sm.controller;
 
-import edu.sm.dto.Cust;
+import edu.sm.app.dto.Cust;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

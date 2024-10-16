@@ -21,6 +21,7 @@ public class JsController {
 
     @RequestMapping("/js1")
     public String js1(Model model) {
+        log.info("click");
         model.addAttribute("left", dir + "left");
         model.addAttribute("center", dir + "js1");
         return "index";

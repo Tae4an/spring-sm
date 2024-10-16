@@ -1,8 +1,7 @@
 package edu.sm.controller;
 
 
-import edu.sm.dto.Item;
-import edu.sm.dto.Marker;
+import edu.sm.app.dto.Marker;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 

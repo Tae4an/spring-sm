@@ -32,3 +32,4 @@ app:
     imgdir: file:///C:/spring_sm/imgs/  # 화면 출력 용
     uploadimgdir: C:/spring_sm/imgs/    # 파일 Write 용
     logdir: file:///C:/spring_sm/logs/
+    readLogDir: C:/spring_sm/logs/

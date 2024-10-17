@@ -35,6 +35,9 @@ dependencies {
     // JSON
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
+    //openCsv 라이브러리
+    implementation 'com.opencsv:opencsv:5.5.2'
+
     //tomcat
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'jakarta.servlet:jakarta.servlet-api'

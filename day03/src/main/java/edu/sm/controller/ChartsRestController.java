@@ -1,11 +1,18 @@
 package edu.sm.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVReader;
 import edu.sm.service.RandomDataGenerator;
+import edu.sm.util.Chart5;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileReader;
 import java.util.Random;
 
 @RestController
@@ -20,6 +27,7 @@ public class ChartsRestController {
     public void init() {
         createChartData();
     }
+
     @RequestMapping("/chart1")
     public Object chart1() {
         JSONArray arr = new JSONArray();
@@ -35,6 +43,23 @@ public class ChartsRestController {
             obj.put("data", arr2);
             arr.add(obj);
         }
+        log.info(arr.toJSONString());
+        return arr;
+    }
+
+    @RequestMapping("/chart1_1")
+    public Object chart1_1() {
+        JSONArray arr = new JSONArray();
+
+        JSONObject obj = new JSONObject();
+        Random r = new Random();
+        obj.put("name", "taesan");
+        JSONArray arr2 = new JSONArray();
+        for (int j = 0; j < 12; j++) {
+            arr2.add(r.nextDouble(40) + 1);
+        }
+        obj.put("data", arr2);
+        arr.add(obj);
         log.info(arr.toJSONString());
         return arr;
     }
@@ -159,6 +184,7 @@ public class ChartsRestController {
 
     private String latestData;
 
+
     @GetMapping("/getData")
     @ResponseBody
     public String getData() {
@@ -173,11 +199,66 @@ public class ChartsRestController {
         }
     }
 
+
     @PostMapping("/receive")
     @ResponseBody
     public void receiveData(@RequestBody String jsonData) {
         this.latestData = jsonData;
-        log.info("Random Data:{}", latestData);
+        log.info(latestData);
     }
 
+
+    private String lastData;
+
+    @RequestMapping("/receive_chart5")
+    public void chart5(
+            @RequestBody String lastData
+    ) {
+        this.lastData = lastData;
+    }
+
+    @GetMapping("/get_last_data")
+    @ResponseBody
+    public String getLastData() {
+        Chart5.lastDataSend();
+        return this.lastData;
+    }
+
+    @Value("${app.dir.readLogDir}")
+    String readlogdir;
+
+    @RequestMapping("/chart6")
+    public Object chart6() throws Exception {
+        String logfile = readlogdir+"power.log";
+
+        JSONObject result = new JSONObject();
+
+        //[{}]
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("name", "Power");
+
+        CSVReader reader = null;
+        reader = new CSVReader(new FileReader(logfile));
+
+        String [] lineData = null;
+        JSONArray jsonArray1 = new JSONArray();
+        JSONArray timeArray = new JSONArray();
+        while((lineData = reader.readNext()) != null){
+            jsonArray1.add(Float.parseFloat(lineData[1]));
+            timeArray.add(lineData[0]);
+        }
+
+        jsonObject.put("data", jsonArray1);
+
+        jsonArray.add(jsonObject);
+        log.info(jsonArray.toJSONString());
+
+        // [{}]
+        // {'x':[], result:[{}]}
+        result.put("result", jsonArray);
+        result.put("x",timeArray );
+        return result;
+    }
 }

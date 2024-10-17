@@ -17,6 +17,12 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value="/chart/chart4"/>">chart4</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/chart/chart5"/>">chart5</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/chart/chart6"/>">chart6</a>
+        </li>
     </ul>
     <hr class="d-sm-none">
 </div>

@@ -6,7 +6,7 @@ import java.util.Random;
 public class Power {
     public static void main(String[] args) {
         String url = "http://127.0.0.1/iot/power";
-        String data = "100.0";
+        String data = "";
         Random rand = new Random();
         for (int i = 0; i < 100; i++) {
             double num = rand.nextDouble() * 5;

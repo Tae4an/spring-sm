@@ -2,13 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     #container{
-        width:700px;
-        height: 500px;
+        width:1000px;
+        height: 300px;
         border: 2px solid red;
     }
     #container2{
-        width:700px;
-        height: 500px;
+        width: 1000px;
+        height: 300px;
         border: 2px solid red;
     }
 </style>

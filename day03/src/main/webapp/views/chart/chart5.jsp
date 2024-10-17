@@ -12,9 +12,6 @@
         init: function () {
             this.display();
         },
-        getData: function () {
-
-        },
         display: function () {
             const onChartLoad = function () {
                 const chart = this,
@@ -26,7 +23,7 @@
                             url: '/charts/get_last_data',
                             type: 'GET',
                             dataType: 'json',
-                            success: function (response) {
+                            success: (response)=> {
                                 x = response.timestamp;
                                 y = response.value;
                                 series.addPoint([x, y], true, true);

@@ -1,0 +1,156 @@
+[2024-10-17 10:33:45:1923][restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 54 mappings in 'requestMappingHandlerMapping'
+[2024-10-17 10:33:45:1972][restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /imgs/**, /logs/**] in 'resourceHandlerMapping'
+[2024-10-17 10:33:45:1999][restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2024-10-17 10:33:45:2027][restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+[2024-10-17 10:33:56:12601][http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@13ac268a
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@1914a0f
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+[2024-10-17 10:33:56:12602][http-nio-80-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+[2024-10-17 10:33:56:12608][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:33:56:12617][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:33:56:12630][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["66.10124312522046"]
+[2024-10-17 10:33:56:12641][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:33:56:12642][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:33:56:12651][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:33:58:14680][http-nio-80-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:33:58:14680][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:33:58:14681][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["65.18060693401662"]
+[2024-10-17 10:33:58:14681][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:33:58:14681][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:33:58:14681][http-nio-80-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:00:16701][http-nio-80-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:00:16701][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:00:16702][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["75.37281290517419"]
+[2024-10-17 10:34:00:16702][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:00:16702][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:00:16703][http-nio-80-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:02:18709][http-nio-80-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:02:18709][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:02:18709][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["92.11232576731373"]
+[2024-10-17 10:34:02:18710][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:02:18710][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:02:18710][http-nio-80-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:04:20722][http-nio-80-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:04:20722][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:04:20722][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["8.738753635610374"]
+[2024-10-17 10:34:04:20722][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:04:20723][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:04:20723][http-nio-80-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:06:22737][http-nio-80-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:06:22738][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:06:22738][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["6.419060840451662"]
+[2024-10-17 10:34:06:22738][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:06:22738][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:06:22739][http-nio-80-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:08:24756][http-nio-80-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:08:24756][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:08:24756][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["95.88787695099137"]
+[2024-10-17 10:34:08:24757][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:08:24757][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:08:24757][http-nio-80-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:10:26766][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:10:26766][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:10:26767][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["66.71546060855789"]
+[2024-10-17 10:34:10:26767][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:10:26767][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:10:26767][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:12:28776][http-nio-80-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:12:28776][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:12:28777][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["59.6017888831461"]
+[2024-10-17 10:34:12:28777][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:12:28777][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:12:28777][http-nio-80-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:14:30792][http-nio-80-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:14:30792][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:14:30793][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["74.16912273843053"]
+[2024-10-17 10:34:14:30793][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:14:30793][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:14:30793][http-nio-80-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:16:32808][http-nio-80-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:16:32808][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:16:32808][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["94.3783888609228"]
+[2024-10-17 10:34:16:32808][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:16:32808][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:16:32809][http-nio-80-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:18:34817][http-nio-80-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:18:34817][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:18:34818][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["48.40993183081639"]
+[2024-10-17 10:34:18:34818][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:18:34818][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:18:34818][http-nio-80-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:20:36828][http-nio-80-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:20:36829][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:20:36829][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["20.0758132890956"]
+[2024-10-17 10:34:20:36829][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:20:36829][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:20:36830][http-nio-80-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:22:38838][http-nio-80-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:22:38838][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:22:38839][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["92.39797129238426"]
+[2024-10-17 10:34:22:38839][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:22:38839][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:22:38839][http-nio-80-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:24:40849][http-nio-80-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:24:40850][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:24:40851][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["44.56510131287041"]
+[2024-10-17 10:34:24:40854][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:24:40855][http-nio-80-exec-8] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:24:40857][http-nio-80-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:26:42867][http-nio-80-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:26:42867][http-nio-80-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:26:42867][http-nio-80-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["74.83911436882971"]
+[2024-10-17 10:34:26:42868][http-nio-80-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:26:42868][http-nio-80-exec-9] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:26:42869][http-nio-80-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:28:44886][http-nio-80-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:28:44887][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:28:44887][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["75.29444717969253"]
+[2024-10-17 10:34:28:44887][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:28:44888][http-nio-80-exec-10] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:28:44889][http-nio-80-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:30:46907][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:30:46907][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:30:46908][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["21.381176124196532"]
+[2024-10-17 10:34:30:46908][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:30:46908][http-nio-80-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:30:46909][http-nio-80-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:32:48923][http-nio-80-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:32:48923][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:32:48923][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["65.43249596772382"]
+[2024-10-17 10:34:32:48923][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:32:48924][http-nio-80-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:32:48924][http-nio-80-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:34:50943][http-nio-80-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:34:50944][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:34:50944][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["68.32695799417137"]
+[2024-10-17 10:34:34:50944][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:34:50944][http-nio-80-exec-3] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:34:50945][http-nio-80-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:36:52963][http-nio-80-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:36:52963][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:36:52964][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["51.90766007682841"]
+[2024-10-17 10:34:36:52964][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:36:52964][http-nio-80-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:36:52964][http-nio-80-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:38:54970][http-nio-80-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:38:54970][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:38:54971][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["78.65497525552568"]
+[2024-10-17 10:34:38:54971][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:38:54971][http-nio-80-exec-4] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:38:54971][http-nio-80-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:40:56977][http-nio-80-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:40:56977][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:40:56977][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["77.79271259406146"]
+[2024-10-17 10:34:40:56978][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:40:56978][http-nio-80-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:40:56978][http-nio-80-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+[2024-10-17 10:34:42:58994][http-nio-80-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/iot/power", parameters={}
+[2024-10-17 10:34:42:58994][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to edu.sm.controller.IotRestController#power(String)
+[2024-10-17 10:34:42:58994][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to ["47.49804209797881"]
+[2024-10-17 10:34:42:58995][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+[2024-10-17 10:34:42:58995][http-nio-80-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [1]
+[2024-10-17 10:34:42:58995][http-nio-80-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK

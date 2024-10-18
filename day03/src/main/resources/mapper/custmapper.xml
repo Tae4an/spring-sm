@@ -4,20 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.sm.app.repository.CustRepository">
 
+    <select id="findByName" resultType="CustDto" parameterType="String">
+        SELECT * FROM cust WHERE cust_name LIKE CONCAT('%', #{custName}, '%')
+    </select>
+
     <select id="selectOne" parameterType="String" resultType="custDto">
-        SELECT * FROM cust WHERE id=#{id}
+        SELECT * FROM cust WHERE cust_id=#{custId}
     </select>
     <select id="select" resultType="custDto">
         SELECT * FROM cust
     </select>
     <insert id="insert" parameterType="custDto">
-        INSERT INTO cust VALUES (#{id},#{pwd},#{name})
+        INSERT INTO cust VALUES (#{custId},#{custPwd},#{custName})
     </insert>
     <update id="update" parameterType="custDto">
-        UPDATE cust SET pwd=#{pwd},name=#{name} WHERE id=#{id}
+        UPDATE cust SET cust_pwd=#{custPwd},cust_name=#{custName} WHERE cust_id=#{custId}
     </update>
     <delete id="delete" parameterType="String">
-        DELETE FROM cust WHERE id=#{id}
+        DELETE FROM cust WHERE cust_id=#{custId}
     </delete>
 
 </mapper>

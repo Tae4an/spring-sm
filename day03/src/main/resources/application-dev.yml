@@ -4,6 +4,7 @@ server:
     encoding:
       charset: UTF-8
       force: true
+
 spring:
   mvc:
     view:
@@ -16,19 +17,17 @@ spring:
     # 실제 서비스용 드라이버
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://127.0.0.1:3306/sm_db?characterEncoding=utf8
-    username: smuser
-    password: 111111
+    username: ENC(9L1Pn8gfE2k9tCRoqsn0KA==)
+    password: ENC(O9wmREUiJMK9npIJuWNWQg==)
+
 mybatis:
   type-aliases-package: edu.sm.app.dto
   mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
-
-
-  #  configuration:
-  #    map-underscore-to-camel-case: true
   level:
     root: info
-
 
 app:
   dir:

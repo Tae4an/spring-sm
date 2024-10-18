@@ -1,34 +1,26 @@
 package edu.sm.cust;
 
 import edu.sm.app.dto.CustDto;
-import edu.sm.app.repository.CustRepository;
 import edu.sm.app.service.CustService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @SpringBootTest
 @Slf4j
-class CustUpdateTest {
+class CustInsertTest {
     @Autowired
     CustService custService;
 
     @Test
-    void testUpdateCust() {
+    void contextLoads() {
+        CustDto custDto = CustDto.builder().custId("id11").custPwd("pwd56").custName("이말자").build();
         try {
-            CustDto custDto = CustDto.builder()
-                    .custId("id01")
-                    .custPwd("pwd999")
-                    .custName("Taesan111")
-                    .build();
-
-            custService.modify(custDto);
+            custService.add(custDto);
         } catch (Exception e) {
-            log.error("테스트 중 오류 발생", e);
             throw new RuntimeException(e);
         }
     }
+
 }

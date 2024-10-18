@@ -32,11 +32,11 @@ public class CustController {
     @RequestMapping("/get")
     public String get(Model model) {
         List<CustDto> custs = new ArrayList<>();
-        custs.add(CustDto.builder().id("id01").pwd("pwd01").name("james01").build());
-        custs.add(CustDto.builder().id("id02").pwd("pwd02").name("james02").build());
-        custs.add(CustDto.builder().id("id03").pwd("pwd03").name("james03").build());
-        custs.add(CustDto.builder().id("id04").pwd("pwd04").name("james04").build());
-        custs.add(CustDto.builder().id("id05").pwd("pwd05").name("james05").build());
+        custs.add(CustDto.builder().custId("id01").custPwd("pwd01").custName("james01").build());
+        custs.add(CustDto.builder().custId("id02").custPwd("pwd02").custName("james02").build());
+        custs.add(CustDto.builder().custId("id03").custPwd("pwd03").custName("james03").build());
+        custs.add(CustDto.builder().custId("id04").custPwd("pwd04").custName("james04").build());
+        custs.add(CustDto.builder().custId("id05").custPwd("pwd05").custName("james05").build());
 
         model.addAttribute("custs",custs);
         model.addAttribute("left",dir+"left");

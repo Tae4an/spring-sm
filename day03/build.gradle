@@ -38,12 +38,18 @@ dependencies {
     //openCsv 라이브러리
     implementation 'com.opencsv:opencsv:5.5.2'
 
+    // Properties Encryption
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
+
+
     // MyBatis & MySQL Driver
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     runtimeOnly 'com.mysql:mysql-connector-j'
+
     // logback SQL
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
-
+    // Mysql handler
+    implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
     //tomcat
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'jakarta.servlet:jakarta.servlet-api'

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.sm.app.repository.CartRepository">
+
+    <select id="selectOne" parameterType="int" resultType="cartDto">
+        SELECT * FROM cart WHERE cart_id = #{cartId}
+    </select>
+
+    <select id="select" resultType="cartDto">
+        SELECT * FROM cart
+    </select>
+
+    <insert id="insert" parameterType="cartDto">
+        INSERT INTO cart VALUES (#{cartId},#{userId}, #{itemId}, #{count}, #{regDate})
+    </insert>
+
+    <update id="update" parameterType="cartDto">
+        UPDATE cart
+        SET user_id = #{userId},
+            item_id = #{itemId},
+            count = #{count},
+            reg_date = #{regDate}
+        WHERE cart_id = #{cartId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM cart WHERE cart_id = #{cartId}
+    </delete>
+
+</mapper>

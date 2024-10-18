@@ -14,8 +14,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class CartDto {
     private int cartId;
-    private String userId;
+    private String custId;
     private int itemId;
     private int count;
     private LocalDateTime regDate;
+    private ItemDto item;
+    private int totalPrice;
 }

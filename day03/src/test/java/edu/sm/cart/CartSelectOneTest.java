@@ -1,6 +1,7 @@
 package edu.sm.cart;
 
 import edu.sm.app.dto.CartDto;
+import edu.sm.app.dto.CustDto;
 import edu.sm.app.service.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class CartSelectOneTest {
     @Test
     void testSelectOneCart() {
         try {
-           cartService.get(1);
+            cartService.get(1);
         } catch (Exception e) {
             log.error("Error retrieving cart item", e);
             throw new RuntimeException(e);

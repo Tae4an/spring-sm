@@ -20,7 +20,7 @@ class CartUpdateTest {
         try {
             CartDto cartDto = CartDto.builder()
                     .cartId(1)
-                    .userId("user33333")
+                    .custId("user33333")
                     .itemId(2)
                     .count(3)
                     .regDate(LocalDateTime.now())

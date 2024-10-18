@@ -18,7 +18,7 @@ class CartInsertTest {
     @Test
     void testInsertCart() {
         CartDto cartDto = CartDto.builder()
-                .userId("user123")
+                .custId("user123")
                 .itemId(1)
                 .count(2)
                 .regDate(LocalDateTime.now())

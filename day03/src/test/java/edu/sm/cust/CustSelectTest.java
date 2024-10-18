@@ -14,12 +14,11 @@ import java.util.List;
 @Slf4j
 class CustSelectTest {
     @Autowired
-    CustRepository custRepository;
+    CustService custService;
     @Test
     void contextLoads() {
         try {
-            List<CustDto> list = custRepository.select();
-            log.info("CustSelectTest================"+list);
+            custService.get();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

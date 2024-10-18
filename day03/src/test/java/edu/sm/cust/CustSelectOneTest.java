@@ -13,11 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 class CustSelectOneTest {
     @Autowired
-    CustRepository custRepository;
+    CustService custService;
     @Test
     void contextLoads() {
         try {
-            log.info("CustSelectOneTest================"+custRepository.selectOne("id01"));
+            custService.get("id01");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

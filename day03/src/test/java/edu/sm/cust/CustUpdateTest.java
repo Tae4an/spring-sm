@@ -2,6 +2,7 @@ package edu.sm.cust;
 
 import edu.sm.app.dto.CustDto;
 import edu.sm.app.repository.CustRepository;
+import edu.sm.app.service.CustService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Slf4j
 class CustUpdateTest {
     @Autowired
-    CustRepository custRepository;
+    CustService custService;
 
     @Test
     void testUpdateCust() {
@@ -24,8 +25,7 @@ class CustUpdateTest {
                     .name("Taesan111")
                     .build();
 
-            custRepository.update(custDto);
-            log.info("Update======================"+custRepository.selectOne(custDto.getId()));
+            custService.modify(custDto);
         } catch (Exception e) {
             log.error("테스트 중 오류 발생", e);
             throw new RuntimeException(e);

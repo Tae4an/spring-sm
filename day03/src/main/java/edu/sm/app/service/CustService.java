@@ -31,11 +31,12 @@ public class CustService implements SMService<String, CustDto> {
 
     @Override
     public CustDto get(String key) throws Exception {
-        return null;
+        return custRepository.selectOne(key);
+
     }
 
     @Override
     public List<CustDto> get() throws Exception {
-        return List.of();
+        return custRepository.select();
     }
 }

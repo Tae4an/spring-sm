@@ -1,0 +1,50 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<style>
+    #car_img{
+        width:200px;
+    }
+</style>
+
+<div class="col-sm-10">
+
+    <h2>Car Get Page</h2>
+    <br>
+    <h5>차량 검색</h5>
+    <form action="<c:url value="/car/search"/>" method="GET" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="차량 이름 검색" name="carName">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">검색</button>
+            </div>
+        </div>
+    </form>
+    <h5>차량 목록</h5>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Production Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="c" items="${cars}">
+            <tr>
+                <td><img id="car_img" src="<c:url value="/img/car"/>/${c.carImg}"></td>
+                <td><a href="/car/detail?id=${c.carId}"/>${c.carName}</td>
+                <td>${c.carColor}</td>
+                <td>${c.carType}</td>
+                <td><fmt:formatNumber type="number" pattern="###,###원" value="${c.carPrice}" />
+                <td>${c.productionDate}</td>
+
+            <%--                <td><fmt:formatDate  value="${c.productionDate}" pattern="yyyy년MM월dd일" />--%>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>

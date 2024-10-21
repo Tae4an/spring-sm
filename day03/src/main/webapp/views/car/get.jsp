@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+
 <style>
     #car_img{
         width:200px;
@@ -40,9 +42,10 @@
                 <td>${c.carColor}</td>
                 <td>${c.carType}</td>
                 <td><fmt:formatNumber type="number" pattern="###,###원" value="${c.carPrice}" />
-                <td>${c.productionDate}</td>
-
-            <%--                <td><fmt:formatDate  value="${c.productionDate}" pattern="yyyy년MM월dd일" />--%>
+                <td>
+                    <c:set var="dateFormat" value="yyyy년 MM월 dd일" />
+                        ${c.productionDate.format(DateTimeFormatter.ofPattern(dateFormat))}
+                </td>
             </tr>
         </c:forEach>
         </tbody>

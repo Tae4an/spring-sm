@@ -4,57 +4,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.sm.app.repository.CartRepository">
 
-    <resultMap id="Cart" type="cartDto">
-        <id property="cartId" column="cart_id"/>
-        <result property="custId" column="cust_id"/>
-        <result property="count" column="count"/>
-        <result property="regDate" column="reg_date"/>
-        <result property="totalPrice" column="total_price"/>
-        <collection property="item" resultMap="Item"/>
-    </resultMap>
-
-    <resultMap id="Item" type="ItemDto">
-        <id property="itemId" column="item_id"/>
-        <result property="itemName" column="item_name"/>
-        <result property="itemPrice" column="item_price"/>
-        <result property="imgName" column="img_name"/>
-    </resultMap>
-
-    <select id="selectOne" parameterType="int" resultMap="Cart">
-        SELECT ct.cart_id, ct.cust_id, ct.item_id, ct.count, ct.reg_date,
-               c.cust_name,
-               i.item_name, i.item_price, i.img_name,
-               (ct.count * i.item_price) AS total_price
-        FROM cart ct
-                 JOIN cust c ON ct.cust_id = c.cust_id
-                 JOIN item i ON ct.item_id = i.item_id
-        WHERE ct.cart_id = #{cartId}
+    <!--    <resultMap id="cartResultMap" type="CartDto">-->
+    <!--        <id column="cart_user_id" property="cartUserId"/>-->
+    <!--        <id column="cart_item_id" property="cartItemId"/>-->
+    <!--        <result column="cart_count" property="cartCount"/>-->
+    <!--        <result column="cart_reg_date" property="cartRegDate"/>-->
+    <!--        <association property="itemdto" javaType="ItemDto">-->
+    <!--            <id column="item_id" property="itemId"/>-->
+    <!--            <result column="item_name" property="itemName"/>-->
+    <!--            <result column="item_price" property="itemPrice"/>-->
+    <!--            <result column="img_name" property="imgName"/>-->
+    <!--            <result column="reg_date" property="regDate"/>-->
+    <!--            <result column="update_date" property="updateDate"/>-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
+    <select id="findByName" resultType="cartDto" parameterType="String">
+        select
+            cust_id,
+            item_id,
+            count,
+            reg_date,
+            item_name,
+            item_price,
+            img_name
+        from cart as c
+                 inner join item i on c.item_id = i.item_id
+        where i.item_name LIKE CONCAT('%', #{itemName}, '%')
+          and c.cust_id = #{custId}
     </select>
 
-    <select id="select" resultMap="Cart">
-        SELECT ct.cart_id, ct.cust_id, ct.item_id, ct.count, ct.reg_date,
-               i.item_name, i.item_price, i.img_name,
-               (ct.count * i.item_price) AS total_price
-        FROM cart ct
-                 JOIN item i ON ct.item_id = i.item_id
-        ORDER BY ct.cart_id
+    <select id="selectOne" parameterType="cartDto" resultType="cartDto">
+        SELECT * FROM cart WHERE cust_id=#{custId}
+                             and  item_id=#{itemId}
     </select>
-
+    <select id="select" resultType="cartDto" fetchSize="100">
+        select
+            cust_id,
+            item_id,
+            count,
+            reg_date,
+            item_name,
+            item_price,
+            img_name
+        from cart as c
+                 inner join item i on c.item_id = i.item_id
+    </select>
     <insert id="insert" parameterType="cartDto">
-        INSERT INTO cart VALUES (#{cartId}, #{custId}, #{itemId}, #{count}, #{regDate})
+        insert into cart values (#{custId},#{itemId},#{count},SYSDATE() )
+            on duplicate key update count= count+#{count}
     </insert>
-
     <update id="update" parameterType="cartDto">
-        UPDATE cart
-        SET cust_id = #{custId},
-            item_id = #{itemId},
-            count = #{count},
-            reg_date = #{regDate}
-        WHERE cart_id = #{cartId}
+        UPDATE cart SET count=#{count} WHERE cust_id=#{cartId}
+                                                  and  item_id=#{itemId}
     </update>
-
-    <delete id="delete" parameterType="int">
-        DELETE FROM cart WHERE cart_id = #{cartId}
+    <delete id="delete" parameterType="cartDto">
+        DELETE FROM cart WHERE cust_id=#{cust_id}
+                           and  item_id=#{item_id}
     </delete>
-
 </mapper>

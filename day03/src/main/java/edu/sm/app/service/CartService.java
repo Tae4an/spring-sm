@@ -12,32 +12,39 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CartService implements SMService<Integer, CartDto> {
+public class CartService implements SMService<CartDto, CartDto> {
 
     final CartRepository cartRepository;
 
+
     @Override
-    public void add(CartDto value) throws Exception {
-        cartRepository.insert(value);
+    public void add(CartDto cartDto) throws Exception {
+        cartRepository.insert(cartDto);
     }
 
     @Override
-    public void modify(CartDto value) throws Exception {
-        cartRepository.update(value);
+    public void modify(CartDto cartDto) throws Exception {
+        cartRepository.update(cartDto);
     }
 
     @Override
-    public void delete(Integer key) throws Exception {
-        cartRepository.delete(key);
+    public void delete(CartDto cartDto) throws Exception {
+        cartRepository.delete(cartDto);
     }
 
     @Override
-    public CartDto get(Integer key) throws Exception {
-        return cartRepository.selectOne(key);
+    public CartDto get(CartDto cartDto) throws Exception {
+        return cartRepository.selectOne(cartDto);
     }
 
     @Override
     public List<CartDto> get() throws Exception {
         return cartRepository.select();
     }
+
+    public List<CartDto> findByName(CartDto cartDto){
+        return cartRepository.findByName(cartDto);
+
+    }
+
 }

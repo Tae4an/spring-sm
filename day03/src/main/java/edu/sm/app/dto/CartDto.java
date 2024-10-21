@@ -13,11 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartDto {
-    private int cartId;
     private String custId;
     private int itemId;
     private int count;
     private LocalDateTime regDate;
-    private ItemDto item;
+//    private ItemDto item;
+    private String itemName;
+    private String itemPrice;
+    private String imgName;
     private int totalPrice;
 }

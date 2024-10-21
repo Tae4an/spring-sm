@@ -19,7 +19,6 @@ class CartUpdateTest {
     void testUpdateCart() {
         try {
             CartDto cartDto = CartDto.builder()
-                    .cartId(1)
                     .custId("user33333")
                     .itemId(2)
                     .count(3)

@@ -1,7 +1,10 @@
 package edu.sm.controller;
 
 
+import edu.sm.app.dto.CustDto;
 import edu.sm.app.dto.Marker;
+import edu.sm.app.service.CustService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +20,10 @@ import java.util.Random;
 
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class AjaxRestController {
+    final CustService custService;
+
     @RequestMapping("/getctime")
     public Object getctime() {
         JSONObject obj = new JSONObject();
@@ -43,16 +49,15 @@ public class AjaxRestController {
     }
 
     @RequestMapping("/check_id")
-    public Object getId(
+    public int getId(
             @RequestParam("r_id") String id
-    ) {
-        JSONObject obj = new JSONObject();
-        if (id.equals("qqqq") || id.equals("qqqqq")) {
-            obj.put("result", "1");
-        } else {
-            obj.put("result", "0");
+    ) throws Exception {
+        CustDto custDto =custService.get(id);
+        if (custDto != null) {
+            return 1;
+        }else {
+            return 0;
         }
-        return obj;
     }
 
     @RequestMapping("/get_markers")

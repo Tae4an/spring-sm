@@ -15,7 +15,7 @@
                         url: '<c:url value="/check_id"/>',
                         data: {'r_id': id},
                         success: function (response) {
-                            if (response.result == 1) {
+                            if (response == 1) {
                                 $('#id_span').text('사용 불가능한 ID 입니다..!').css('color', 'red');
                             } else {
                                 $('#id_span').text('사용 가능한 ID 입니다.').css('color', 'green');
@@ -66,17 +66,17 @@
             <form id="register_form">
                 <div class="mb-3 mt-3">
                     <label for="id" class="form-label">ID:</label>
-                    <input type="text" class="form-control" id="id" placeholder="Enter id" name="id" required>
+                    <input type="text" class="form-control" id="id" placeholder="Enter id" name="custId" required>
                     <span id="id_span"></span>
                 </div>
                 <div class="mb-3">
                     <label for="pwd" class="form-label">Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd"
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="custPwd"
                            required>
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Name" name="custName" required>
                 </div>
                 <button type="button" class="btn btn-primary">Submit</button>
             </form>

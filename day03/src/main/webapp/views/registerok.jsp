@@ -4,5 +4,5 @@
 <div class="col-sm-10">
 
     <h2>Register Ok</h2>
-    <h5>${id} 님 환영합니다.</h5>
+    <h5>${sessionScope.loginid.custName} 님 환영합니다.</h5>
 </div>

@@ -36,7 +36,7 @@
 </div>
 <ul class="nav justify-content-end">
     <c:choose>
-        <c:when test="${sessionScope.loginid == null}">
+        <c:when test="${sessionScope.loginid.custId == null}">
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/login"/> ">Login</a>
             </li>
@@ -77,7 +77,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/chart"/> ">Chart</a>
             </li>
-            <c:if test="${sessionScope.loginid != null}">
+            <c:if test="${sessionScope.loginid.custId != null}">
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/cust"/> ">Cust</a>
                 </li>

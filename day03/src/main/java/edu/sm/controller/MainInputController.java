@@ -1,6 +1,9 @@
 package edu.sm.controller;
 
+import edu.sm.app.dto.CustDto;
+import edu.sm.app.service.CustService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class MainInputController {
+
+    final CustService custService;
 
     @RequestMapping("/logout_impl")
     public String logoutImpl(HttpSession session, Model model) {
-        if(session != null) {
+        if (session != null) {
             session.invalidate();
         }
         return "redirect:/";
@@ -30,34 +36,32 @@ public class MainInputController {
         log.info("ID:{}", id);
         log.info("PWD:{}", pwd);
 
-        if (id.equals("aaa") && pwd.equals("111")){
+        if (id.equals("aaa") && pwd.equals("111")) {
             session.setAttribute("loginid", id);
             return "redirect:/";
-        }else {
-            model.addAttribute("center","login");
+        } else {
+            model.addAttribute("center", "login");
             model.addAttribute("error", "Invalid ID or Password");
             return "index";
         }
     }
+
     @RequestMapping("/register_impl")
     public String registerImpl(
             Model model,
-            @RequestParam("id") String id,
-            @RequestParam("pwd") String pwd,
-            @RequestParam("name") String name,
+            CustDto custDto,
             HttpSession session
-    ) {
+    ) throws Exception {
 
-        log.info("ID:{}", id);
-        log.info("PWD:{}", pwd);
-        log.info("NAME:{}", name);
+        log.info("Cust Info:{}", custDto);
+        custService.add(custDto);
+        session.setAttribute("loginid", custDto);
 
-        session.setAttribute("loginid", id);
-
-        model.addAttribute("center","registerok");
-        model.addAttribute("id", id);
+        model.addAttribute("center", "registerok");
+        model.addAttribute("id", custDto.getCustId());
         return "index";
     }
+
     @RequestMapping("/signup_impl")
     public String signupimpl(
             Model model,

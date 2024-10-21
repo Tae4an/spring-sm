@@ -1,6 +1,8 @@
 package edu.sm.cart;
 
+import edu.sm.app.dto.CartDto;
 import edu.sm.app.service.CartService;
+import edu.sm.app.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,17 @@ class CartDeleteTest {
     CartService cartService;
 
     @Test
-    void testDeleteCart() {
+    void contextLoads() {
+
+        CartDto cartDto = CartDto.builder()
+                .custId("id01")
+                .itemId(1)
+                .build();
         try {
-            cartService.delete(1);
+            cartService.delete(cartDto);
         } catch (Exception e) {
-            log.error("Error deleting cart item", e);
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -31,13 +31,11 @@ public class MainInputController {
             @RequestParam("id") String id,
             @RequestParam("pwd") String pwd,
             HttpSession session
-    ) {
+    ) throws Exception {
+        CustDto custDto = custService.get(id);
 
-        log.info("ID:{}", id);
-        log.info("PWD:{}", pwd);
-
-        if (id.equals("aaa") && pwd.equals("111")) {
-            session.setAttribute("loginid", id);
+        if (custDto != null && custDto.getCustPwd().equals(pwd)) {
+            session.setAttribute("loginid", custDto);
             return "redirect:/";
         } else {
             model.addAttribute("center", "login");

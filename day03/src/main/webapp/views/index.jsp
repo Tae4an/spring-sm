@@ -6,6 +6,7 @@
 <html lang="ko">
 <head>
     <title>2024년 몰입형 SW 정규과정 실습</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -49,7 +50,7 @@
         </c:when>
         <c:otherwise>
             <li class="nav-item">
-                <a class="nav-link" href="#">${sessionScope.loginid}</a>
+                <a class="nav-link" href="#">${sessionScope.loginid.custName}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/logout_impl"/>">Logout</a>

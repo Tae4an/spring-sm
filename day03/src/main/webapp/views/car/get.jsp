@@ -16,7 +16,8 @@
     <h5>차량 검색</h5>
     <form action="<c:url value="/car/search"/>" method="GET" class="mb-3">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="차량 이름 검색" name="carName">
+<%--            <input type="text" class="form-control" placeholder="차량 이름 검색" name="name">--%>
+            <input type="text" class="form-control" placeholder="검색어를 입력하세요(차량 이름, 차량 가격, 차량 색상, 차량 타입 등등..)" name="keyword">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">검색</button>
             </div>

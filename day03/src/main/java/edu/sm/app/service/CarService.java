@@ -1,6 +1,7 @@
 package edu.sm.app.service;
 
 import edu.sm.app.dto.CarDto;
+import edu.sm.app.dto.CarSearchDto;
 import edu.sm.app.frame.SMService;
 import edu.sm.app.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,11 @@ public class CarService implements SMService<Integer, CarDto> {
     }
     public List<CarDto> findByName(String name) throws Exception {
         return carRepository.findByName(name);
+    }
+
+    public List<CarDto> searchCars(String keyword) throws Exception {
+        CarSearchDto carSearchDto = new CarSearchDto();
+        carSearchDto.setSearchKeyword(keyword);
+        return carRepository.searchCars(carSearchDto);
     }
 }

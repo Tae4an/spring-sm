@@ -1,6 +1,7 @@
 package edu.sm.controller;
 
 import edu.sm.app.dto.CarDto;
+import edu.sm.app.dto.CarSearchDto;
 import edu.sm.app.dto.CustDto;
 import edu.sm.app.dto.Item;
 import edu.sm.app.service.CarService;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -76,9 +78,14 @@ public class CarController {
     }
 
     @RequestMapping("/search")
-    public String search(Model model,  @RequestParam("carName") String name
+    public String search(
+            Model model,
+//            @RequestParam("carName") String name
+            @RequestParam("keyword") String keyword
     ) throws Exception {
-        List<CarDto> cars = carService.findByName(name);
+//        List<CarDto> cars = carService.findByName(name);
+        List<CarDto> cars = carService.searchCars(keyword);
+
         model.addAttribute("cars",cars);
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"get");

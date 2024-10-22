@@ -1,7 +1,9 @@
 
 package edu.sm.controller;
 
+import com.github.pagehelper.PageInfo;
 import edu.sm.app.dto.CustDto;
+import edu.sm.app.dto.Search;
 import edu.sm.app.service.CustService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,16 +23,18 @@ public class CustController {
 
     String dir = "cust/";
     final CustService custService;
+
     @RequestMapping("")
     public String cust(Model model) {
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"center");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "center");
         return "index";
     }
+
     @RequestMapping("/add")
     public String add(Model model) {
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"add");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "add");
         return "index";
     }
 
@@ -41,8 +45,8 @@ public class CustController {
     ) throws Exception {
         CustDto custDto = custService.get(id);
         model.addAttribute("cust", custDto);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"detail");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "detail");
         return "index";
     }
 
@@ -52,10 +56,11 @@ public class CustController {
             CustDto custDto
     ) throws Exception {
         custService.modify(custDto);
-        return "redirect:/cust/detail?id="+custDto.getCustId();
+        return "redirect:/cust/detail?id=" + custDto.getCustId();
     }
+
     @RequestMapping("/delete_impl")
-    public String deleteImpl(Model model,  @RequestParam("id") String id
+    public String deleteImpl(Model model, @RequestParam("id") String id
     ) throws Exception {
         custService.delete(id);
         return "redirect:/cust/get";
@@ -65,9 +70,52 @@ public class CustController {
     public String get(Model model) throws Exception {
         List<CustDto> custs = custService.get();
 
-        model.addAttribute("custs",custs);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"get");
+        model.addAttribute("custs", custs);
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "page");
         return "index";
     }
+
+    @RequestMapping("/page")
+    public String page(
+            Model model,
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo
+    ) throws Exception {
+        PageInfo<CustDto> p;
+        p = new PageInfo<>(custService.getPage(pageNo), 5); // 5:하단 네비게이션 개수
+
+        model.addAttribute("custPage", p);
+        model.addAttribute("target", "cust");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "page");
+        return "index";
+    }
+
+    @RequestMapping("/search")
+    public String search(Model model) {
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "search");
+        return "index";
+    }
+
+    @RequestMapping("/find_impl")
+    public String findImpl(
+            Model model,
+            Search search,
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo
+
+    ) throws Exception {
+
+        PageInfo<CustDto> p;
+        p = new PageInfo<>(custService.getFindPage(pageNo,search), 3); // 3:하단 네비게이션 개수
+
+        log.info("============================================="+search.toString());
+        model.addAttribute("custPage", p);
+        model.addAttribute("search", search);
+        model.addAttribute("target", "cust");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "search");
+        return "index";
+    }
+
 }

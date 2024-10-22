@@ -3,8 +3,7 @@
 
 <div class="col-sm-10">
 
-    <h2>Get Page</h2>
-    <h5>회원 정보</h5>
+    <h2>CustPage Page</h2>
     <table class="table" id="cdata">
         <thead class="thead-dark">
         <tr>
@@ -14,14 +13,14 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="c" items="${custs}">
+        <c:forEach var="c" items="${custPage.getList()}">
             <tr>
-                <td><a href="/cust/detail?id=${c.custId}">${c.custId}</a></td>
+                <td><a href="/cust/page?id=${c.custId}">${c.custId}</a></td>
                 <td>${c.custPwd}</td>
                 <td>${c.custName}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <jsp:include page="page.jsp"/>
+    <jsp:include page="../nav.jsp"/>
 </div>

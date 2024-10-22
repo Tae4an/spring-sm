@@ -15,7 +15,7 @@ class CustInsertTest {
 
     @Test
     void contextLoads() {
-        CustDto custDto = CustDto.builder().custId("id11").custPwd("pwd56").custName("이말자").build();
+        CustDto custDto = CustDto.builder().custId("id11").custPwd("pwd11").custName("최태산").build();
         try {
             custService.add(custDto);
         } catch (Exception e) {

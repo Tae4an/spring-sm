@@ -1,6 +1,7 @@
 
 package edu.sm.app.repository;
 
+import com.github.pagehelper.Page;
 import edu.sm.app.dto.CarDto;
 import edu.sm.app.dto.CarSearchDto;
 import edu.sm.app.frame.SMRepository;
@@ -13,5 +14,5 @@ import java.util.List;
 @Mapper
 public interface CarRepository extends SMRepository<Integer, CarDto> {
     List<CarDto> findByName(String name);
-    List<CarDto> searchCars(CarSearchDto carSearchDto);
+    Page<CarDto> searchCars(String keyword);
 }

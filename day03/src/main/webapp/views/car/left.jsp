@@ -11,7 +11,6 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value="/car/get"/>">Get</a>
         </li>
-
     </ul>
     <hr class="d-sm-none">
 </div>

@@ -35,15 +35,15 @@
         SELECT * FROM car WHERE car_name LIKE CONCAT('%', #{carName}, '%')
     </select>
 
-    <select id="searchCars" parameterType="CarSearchDto" resultType="CarDto">
+    <select id="searchCars" parameterType="String" resultType="CarDto">
         SELECT * FROM car
         <where>
-            <if test="searchKeyword != null and searchKeyword != ''">
-                car_name LIKE CONCAT('%', #{searchKeyword}, '%')
-                OR car_price  <![CDATA[<=]]> #{searchKeyword}
-                OR car_color LIKE CONCAT('%', #{searchKeyword}, '%')
-                OR car_type LIKE CONCAT('%', #{searchKeyword}, '%')
-                OR DATE_FORMAT(production_date, '%Y년-%m월-%d일') LIKE CONCAT('%', #{searchKeyword}, '%')
+            <if test="keyword != null and keyword != ''">
+                car_name LIKE CONCAT('%', #{keyword}, '%')
+                OR car_price  <![CDATA[<=]]> #{keyword}
+                OR car_color LIKE CONCAT('%', #{keyword}, '%')
+                OR car_type LIKE CONCAT('%', #{keyword}, '%')
+                OR DATE_FORMAT(production_date, '%Y년-%m월-%d일') LIKE CONCAT('%', #{keyword}, '%')
             </if>
         </where>
         ORDER BY production_date DESC

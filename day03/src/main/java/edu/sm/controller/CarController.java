@@ -1,20 +1,15 @@
 package edu.sm.controller;
 
-import edu.sm.app.dto.CarDto;
-import edu.sm.app.dto.CarSearchDto;
-import edu.sm.app.dto.CustDto;
-import edu.sm.app.dto.Item;
+import com.github.pagehelper.PageInfo;
+import edu.sm.app.dto.*;
 import edu.sm.app.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -44,9 +39,14 @@ public class CarController {
         return "index";
     }
     @RequestMapping("/get")
-    public String get(Model model) throws Exception {
-        List<CarDto> cars = carService.get();
-        model.addAttribute("cars",cars);
+    public String get(
+            Model model,
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo
+    ) throws Exception {
+        PageInfo<CarDto> p;
+        p = new PageInfo<>(carService.searchCars(pageNo,""), 5); // 3:하단 네비게이션 개수
+        model.addAttribute("carPage",p);
+        model.addAttribute("target", "car");
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"get");
         return "index";
@@ -80,13 +80,15 @@ public class CarController {
     @RequestMapping("/search")
     public String search(
             Model model,
-//            @RequestParam("carName") String name
-            @RequestParam("keyword") String keyword
+            @RequestParam("keyword") String keyword,
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo
     ) throws Exception {
-//        List<CarDto> cars = carService.findByName(name);
-        List<CarDto> cars = carService.searchCars(keyword);
-
-        model.addAttribute("cars",cars);
+        PageInfo<CarDto> p;
+        p = new PageInfo<>(carService.searchCars(pageNo,keyword), 5); // 3:하단 네비게이션 개수
+        log.info("======================================="+keyword);
+        model.addAttribute("carPage",p);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("target", "car");
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"get");
         return "index";
@@ -97,5 +99,6 @@ public class CarController {
         carService.add(carDto);
         return "redirect:/car/get";
     }
+
 
 }

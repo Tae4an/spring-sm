@@ -1,7 +1,11 @@
 package edu.sm.app.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import edu.sm.app.dto.CarDto;
 import edu.sm.app.dto.CarSearchDto;
+import edu.sm.app.dto.CustDto;
+import edu.sm.app.dto.Search;
 import edu.sm.app.frame.SMService;
 import edu.sm.app.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,9 +47,10 @@ public class CarService implements SMService<Integer, CarDto> {
         return carRepository.findByName(name);
     }
 
-    public List<CarDto> searchCars(String keyword) throws Exception {
-        CarSearchDto carSearchDto = new CarSearchDto();
-        carSearchDto.setSearchKeyword(keyword);
-        return carRepository.searchCars(carSearchDto);
+    public Page<CarDto> searchCars(int pageNo,String keyword) throws Exception {
+        PageHelper.startPage(pageNo,4);
+        return carRepository.searchCars(keyword);
     }
+
+
 }

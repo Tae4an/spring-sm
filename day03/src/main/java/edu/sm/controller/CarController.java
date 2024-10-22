@@ -5,6 +5,7 @@ import edu.sm.app.dto.CustDto;
 import edu.sm.app.dto.Item;
 import edu.sm.app.service.CarService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ import java.util.List;
 public class CarController {
     private final CarService carService;
     String dir = "car/";
+
+    @Value("${app.dir.uploadimgdir}")
+    private String uploadBaseDir;
 
     public CarController(CarService carService) {
         this.carService = carService;
@@ -80,4 +84,11 @@ public class CarController {
         model.addAttribute("center",dir+"get");
         return "index";
     }
+
+    @RequestMapping("/insert_impl")
+    public String insertImpl(Model model,  CarDto carDto) throws Exception {
+        carService.add(carDto);
+        return "redirect:/car/get";
+    }
+
 }

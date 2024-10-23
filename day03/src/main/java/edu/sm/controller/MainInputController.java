@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -52,7 +54,14 @@ public class MainInputController {
     ) throws Exception {
 
         log.info("Cust Info:{}", custDto);
-        custService.add(custDto);
+        try {
+            custService.add(custDto);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw e;
+        }
+
         session.setAttribute("loginid", custDto);
 
         model.addAttribute("center", "registerok");

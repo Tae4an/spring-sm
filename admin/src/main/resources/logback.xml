@@ -63,10 +63,9 @@
         <appender-ref ref="FILE2" />
     </logger>
 
-    <logger name="edu.sm.controller.IotRestController" level="INFO">
+    <logger name="edu.sm.controller.IotPowerRestController" level="INFO">
         <appender-ref ref="FILE3" />
     </logger>
-
     <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>

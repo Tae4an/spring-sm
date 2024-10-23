@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-public class Chart5 {
+public class LastDataSend {
     public static void lastDataSend() {
         String logFile = "C:/spring_sm/logs/power.log";
-        String url = "http://127.0.0.1/charts/receive_chart5";
+        String url = "http://127.0.0.1:81/receiveChartData";
         String lastLine = null;
 
         try (BufferedReader br = new BufferedReader(

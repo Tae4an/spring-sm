@@ -19,7 +19,7 @@ public class RandomDataGenerator {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://127.0.0.1:80/charts/receive"))
+                .uri(URI.create("http://127.0.0.1:81/receiveChartData"))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonString))
                 .build();

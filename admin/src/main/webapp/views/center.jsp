@@ -1,110 +1,226 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
 
+</style>
 <script>
     let center_websocket = {
-        stompClient:null,
-        init:function(){
+        stompClient: null,
+        init: function () {
             let socket = new SockJS('${serverurl}/wss');
             this.stompClient = Stomp.over(socket);
             console.log('Start -------');
 
-            this.stompClient.connect({},function(frame){
+            this.stompClient.connect({}, function (frame) {
                 console.log(frame);
-                this.subscribe('/send2',function(msg){
+                this.subscribe('/send2', function (msg) {
                     console.log(msg);
-                    console.log(typeof(msg));
+                    console.log(typeof (msg));
                     console.log(msg.content1);
                     console.log(JSON.parse(msg.body).content1);
                     $('#msg1').text(JSON.parse(msg.body).content1);
                     $('#msg2').text(JSON.parse(msg.body).content2);
                     $('#msg3').text(JSON.parse(msg.body).content3);
                     $('#msg4').text(JSON.parse(msg.body).content4);
-                    $('#progress1').css('width',JSON.parse(msg.body).content1/100*100+'%');
-                    $('#progress1').attr('aria-valuenow',JSON.parse(msg.body).content1/100*100);
-                    $('#progress2').css('width',JSON.parse(msg.body).content2/1000*100+'%');
-                    $('#progress2').attr('aria-valuenow',JSON.parse(msg.body).content2/1000*100);
-                    $('#progress3').css('width',JSON.parse(msg.body).content3/500*100+'%');
-                    $('#progress3').attr('aria-valuenow',JSON.parse(msg.body).content3/500*100);
-                    $('#progress4').css('width',JSON.parse(msg.body).content4/10*100+'%');
-                    $('#progress4').attr('aria-valuenow',JSON.parse(msg.body).content4/10*100);
+                    $('#progress1').css('width', JSON.parse(msg.body).content1 / 100 * 100 + '%');
+                    $('#progress1').attr('aria-valuenow', JSON.parse(msg.body).content1 / 100 * 100);
+                    $('#progress2').css('width', JSON.parse(msg.body).content2 / 1000 * 100 + '%');
+                    $('#progress2').attr('aria-valuenow', JSON.parse(msg.body).content2 / 1000 * 100);
+                    $('#progress3').css('width', JSON.parse(msg.body).content3 / 500 * 100 + '%');
+                    $('#progress3').attr('aria-valuenow', JSON.parse(msg.body).content3 / 500 * 100);
+                    $('#progress4').css('width', JSON.parse(msg.body).content4 / 10 * 100 + '%');
+                    $('#progress4').attr('aria-valuenow', JSON.parse(msg.body).content4 / 10 * 100);
                 });
             });
         }
     };
     let center = {
-        init:function(){
-            const defaultData = '${charturl}/logs/custinfo.log';
-            const urlInput = document.getElementById('fetchURL');
-            const pollingCheckbox = document.getElementById('enablePolling');
-            const pollingInput = document.getElementById('pollingTime');
-
-            function createChart() {
-                Highcharts.chart('live_chart', {
-                    chart: {
-                        type: 'areaspline'
-                    },
+        init: function () {
+            this.getdata();
+            this.display2();
+            setInterval(() => {
+                this.getdata();
+            }, 5000);
+        },
+        getdata: function () {
+            $.ajax({
+                url: '/getChart',
+                success: (datas) => {
+                    this.display1(datas);
+                }
+            });
+        },
+        display1: function (datas) {
+            Highcharts.chart('chart1_container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Monthly Average Temperature'
+                },
+                subtitle: {
+                    text: 'Source: ' +
+                        '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+                        'target="_blank">Wikipedia.com</a>'
+                },
+                xAxis: {
+                    categories: datas.x
+                },
+                yAxis: {
                     title: {
-                        text: 'Live Data'
-                    },
-                    accessibility: {
-                        announceNewData: {
-                            enabled: true,
-                            minAnnounceInterval: 15000,
-                            announcementFormatter: function (
-                                allSeries,
-                                newSeries,
-                                newPoint) {
-                                if (newPoint) {
-                                    return 'New point added. Value: ' + newPoint.y;
-                                }
-                                return false;
-                            }
-                        }
-                    },
-                    plotOptions: {
-                        areaspline: {
-                            color: '#32CD32',
-                            fillColor: {
-                                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                                stops: [
-                                    [0, '#32CD32'],
-                                    [1, '#32CD3200']
-                                ]
-                            },
-                            threshold: null,
-                            marker: {
-                                lineWidth: 1,
-                                lineColor: null,
-                                fillColor: 'white'
-                            }
-                        }
-                    },
-                    data: {
-                        csvURL: '${charturl}/logs/custinfo.log',
-                        enablePolling: true,
-                        dataRefreshRate: 1
+                        text: 'Temperature (°C)'
                     }
-                });
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: datas.result
+            });
+        },
+        display2: function () {
+            const onChartLoad = function () {
+                const chart = this,
+                    series = chart.series[0];
 
-                // if (pollingInput.value < 1 || !pollingInput.value) {
-                     //pollingInput.value = 1;
-                // }
-            }
+                setInterval(async function () {
+                    try {
+                        $.ajax({
+                            url: '/getLastData',
+                            type: 'GET',
+                            dataType: 'json',
+                            success: (response) => {
+                                x = response.timestamp;
+                                y = response.value;
+                                series.addPoint([x, y], true, true);
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }, 1000);
+                console.log(chart.series);
+            };
 
-            // urlInput.value = defaultData;
+            const data = (function () {
+                const data = [];
+                const time = new Date().getTime();
 
-            // We recreate instead of using chart update to make sure the loaded CSV
-            // and such is completely gone.
-            // pollingCheckbox.onchange = urlInput.onchange =
-            //     pollingInput.onchange = createChart;
+                for (let i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: Math.random()
+                    });
+                }
+                return data;
+            }());
 
-            // Create the chart
-            createChart();
+            // Plugin to add a pulsating marker on add point
+            Highcharts.addEvent(Highcharts.Series, 'addPoint', e => {
+                const point = e.point,
+                    series = e.target;
+
+                if (!series.pulse) {
+                    series.pulse = series.chart.renderer.circle()
+                        .add(series.markerGroup);
+                }
+
+                setTimeout(() => {
+                    series.pulse
+                        .attr({
+                            x: series.xAxis.toPixels(point.x, true),
+                            y: series.yAxis.toPixels(point.y, true),
+                            r: series.options.marker.radius,
+                            opacity: 1,
+                            fill: series.color
+                        })
+                        .animate({
+                            r: 20,
+                            opacity: 0
+                        }, {
+                            duration: 1000
+                        });
+                }, 1);
+            });
+
+
+            Highcharts.chart('chart2_container', {
+                chart: {
+                    type: 'spline',
+                    events: {
+                        load: onChartLoad,
+                    }
+                },
+
+                time: {
+                    useUTC: false
+                },
+
+                title: {
+                    text: 'Live random data'
+                },
+
+                accessibility: {
+                    announceNewData: {
+                        enabled: true,
+                        minAnnounceInterval: 15000,
+                        announcementFormatter: function (allSeries, newSeries, newPoint) {
+                            if (newPoint) {
+                                return 'New point added. Value: ' + newPoint.y;
+                            }
+                            return false;
+                        }
+                    }
+                },
+
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150,
+                    maxPadding: 0.1
+                },
+
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }
+                    ]
+                },
+
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br/>',
+                    pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+                },
+
+                legend: {
+                    enabled: false
+                },
+
+                exporting: {
+                    enabled: false
+                },
+
+                series: [
+                    {
+                        name: 'Random data',
+                        lineWidth: 2,
+                        color: Highcharts.getOptions().colors[2],
+                        data
+                    }
+                ]
+            });
         }
     };
-    $(function(){
+    $(function () {
         center.init();
         center_websocket.init();
     });
@@ -121,44 +237,6 @@
 
     <!-- Content Row -->
     <div class="row">
-
-        <!-- Earnings (Monthly) Card Example -->
-<%--        <div class="col-xl-3 col-md-6 mb-4">--%>
-<%--            <div class="card border-left-primary shadow h-100 py-2">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="row no-gutters align-items-center">--%>
-<%--                        <div class="col mr-2">--%>
-<%--                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">--%>
-<%--                                Earnings (Monthly)</div>--%>
-<%--                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-auto">--%>
-<%--                            <i class="fas fa-calendar fa-2x text-gray-300"></i>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-        <!-- Earnings (Monthly) Card Example -->
-<%--        <div class="col-xl-3 col-md-6 mb-4">--%>
-<%--            <div class="card border-left-success shadow h-100 py-2">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="row no-gutters align-items-center">--%>
-<%--                        <div class="col mr-2">--%>
-<%--                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">--%>
-<%--                                Earnings (Annual)</div>--%>
-<%--                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-auto">--%>
-<%--                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-        <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -267,90 +345,29 @@
                 </div>
             </div>
         </div>
-
-        <!-- Pending Requests Card Example -->
-<%--        <div class="col-xl-3 col-md-6 mb-4">--%>
-<%--            <div class="card border-left-warning shadow h-100 py-2">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="row no-gutters align-items-center">--%>
-<%--                        <div class="col mr-2">--%>
-<%--                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">--%>
-<%--                                Pending Requests</div>--%>
-<%--                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-auto">--%>
-<%--                            <i class="fas fa-comments fa-2x text-gray-300"></i>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
     </div>
 
     <!-- Content Row -->
 
     <div class="row">
 
-        <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
+        <div class="col-xl-6 col-lg-7">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div
+                <div id = "chart1_container"
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
                 </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div id="live_chart">
 
-                    </div>
-                </div>
             </div>
         </div>
-
-        <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
+        <div class="col-xl-6 col-lg-7">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div
+                <div id = "chart2_container"
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                             aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-
 
 
 </div>

@@ -4,6 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.sm.app.repository.ItemRepository">
 
+    <select id="searchItems" parameterType="String" resultType="ItemDto">
+        SELECT * FROM item
+        <where>
+            <if test="keyword != null and keyword != ''">
+                item_name LIKE CONCAT('%', #{keyword}, '%')
+                OR item_price  <![CDATA[<=]]> #{keyword}
+                OR DATE_FORMAT(reg_date, '%Y년-%m월-%d일') LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY reg_date DESC
+    </select>
+
     <select id="selectOne" parameterType="int" resultType="itemDto">
         SELECT * FROM item WHERE item_id = #{itemId}
     </select>
@@ -13,7 +25,7 @@
     </select>
 
     <insert id="insert" parameterType="itemDto">
-        INSERT INTO item VALUES (#{itemId}, #{itemName}, #{itemPrice}, #{imgName}, #{regDate}, #{updateDate})
+        INSERT INTO item VALUES (#{itemId}, #{itemName}, #{itemPrice}, #{imgName}, sysdate(), #{updateDate})
     </insert>
 
     <update id="update" parameterType="itemDto">

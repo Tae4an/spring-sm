@@ -13,7 +13,7 @@
     </select>
 
     <insert id="insert" parameterType="itemDto">
-        INSERT INTO item VALUES (#{itemId}, #{itemName}, #{itemPrice}, #{imgName}, #{regDate}, #{updateDate})
+        INSERT INTO item VALUES (#{itemId}, #{itemName}, #{itemPrice}, #{imgName}, sysdate(), #{updateDate})
     </insert>
 
     <update id="update" parameterType="itemDto">

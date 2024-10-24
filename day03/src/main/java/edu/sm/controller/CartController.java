@@ -2,8 +2,10 @@ package edu.sm.controller;
 
 
 import edu.sm.app.dto.CartDto;
+import edu.sm.app.dto.CustDto;
 import edu.sm.app.service.CartService;
 import edu.sm.app.service.ItemService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -32,12 +34,18 @@ public class CartController {
         return "index";
     }
     @RequestMapping("/add_impl")
-    public String addimpl(Model model, CartDto cartDto) throws Exception {
-        // 데이터 입력
-//        cartDto.setImgName(cartDto.getImage().getOriginalFilename());
-        cartService.add(cartDto);
+    public String addimpl(Model model, CartDto cartDto, HttpSession session) throws Exception {
+        // 세션에서 로그인된 사용자 ID 가져오기
+        CustDto cust = (CustDto) session.getAttribute("loginid");
 
-        return "redirect:/cart/get";
+        if (cust == null) return "redirect:/login"; // 로그인 페이지로 리다이렉트
+
+        // CartDto에 로그인된 사용자 ID 설정
+        cartDto.setCustId(cust.getCustId());
+
+        // 데이터 입력
+        cartService.add(cartDto);
+        return "redirect:/item/get";
     }
 
     @ResponseBody
@@ -64,9 +72,7 @@ public class CartController {
             Model model,
             @RequestParam("custId") String custId
     ) throws Exception {
-        log.info("===============================custId--{}", custId);
         List<CartDto> list = cartService.get(custId);
-        log.info("===============================List{}", list);
         model.addAttribute("cartlist",list);
         model.addAttribute("center",dir+"get");
 

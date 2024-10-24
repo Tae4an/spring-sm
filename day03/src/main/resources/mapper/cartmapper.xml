@@ -53,14 +53,14 @@
     <select id="select" resultType="cartDto" fetchSize="100">
         select
             cust_id,
-            item_id,
+            ct.item_id,
             count,
-            reg_date,
+            ct.reg_date,
             item_name,
             item_price,
             img_name
-        from cart as c
-                 inner join item i on c.item_id = i.item_id
+        from cart ct
+                 inner join item i on ct.item_id = i.item_id
     </select>
     <insert id="insert" parameterType="cartDto">
         insert into cart values (#{custId},#{itemId},#{count},SYSDATE() )

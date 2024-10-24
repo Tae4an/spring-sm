@@ -85,7 +85,7 @@ public class ItemController {
         itemDto = itemService.get(id);
         model.addAttribute("item",itemDto);
         model.addAttribute("center",dir+"detail");
-
+        model.addAttribute("left",dir+"left");
 
         return "index";
     }

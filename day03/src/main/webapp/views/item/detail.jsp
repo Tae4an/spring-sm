@@ -27,6 +27,18 @@
                     location.href = '<c:url value="/item/delete"/>' + '?id=' + id;
                 }
             });
+
+            $('#item_update_form > #btn_addCart').click(() => {
+                let count = $('#itemCount').val();
+                let name = $('#name').val();
+                let id = $('#id').val();
+                console.log();
+                let c = confirm('장바구니에 ' + name + ' ' + count + '개를 추가하시겠습니까?');
+                if (c == true) {
+                    location.href = '<c:url value="/cart/add_impl?itemId="/>' + id +'&count=' + count ;
+                    alert('장바구니에 추가되었습니다.');
+                }
+            });
         },
         send: function () {
             $('#item_update_form').attr({
@@ -83,7 +95,7 @@
                         <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${ parsedDateTime }"/>
                     </h6>
                 </div>
-                <div id = "imgFile" class="form-group">
+                <div id="imgFile" class="form-group">
                     <img src="<c:url value="/imgs"/>/${item.imgName}">
                     <input type="hidden" name="imgName" value="${item.imgName}"/>
                 </div>
@@ -95,6 +107,8 @@
                 </div>
                 <button id="btn_update" type="button" class="btn btn-primary">Update</button>
                 <button id="btn_delete" type="button" class="btn btn-primary">Delete</button>
+                <input type="number" id="itemCount" min="1" value="1">
+                <button id="btn_addCart" type="button" class="btn btn-primary">Add Cart</button>
 
             </form>
         </div>

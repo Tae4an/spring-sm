@@ -50,6 +50,9 @@
         </c:when>
         <c:otherwise>
             <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/cart/get?custId="/>${sessionScope.loginid.custId}">Cart</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">${sessionScope.loginid.custName}</a>
             </li>
             <li class="nav-item">

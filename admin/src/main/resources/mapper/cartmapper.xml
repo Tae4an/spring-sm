@@ -33,16 +33,26 @@
           and c.cust_id = #{custId}
     </select>
 
-    <select id="selectOne" parameterType="cartDto" resultType="cartDto">
-        SELECT * FROM cart WHERE cust_id=#{custId}
-                             and  item_id=#{itemId}
+    <select id="selectOne" parameterType="cartDto" resultType="CartDto">
+        SELECT cust_id,
+               c.item_id,
+               count,
+               c.reg_date,
+               item_name,
+               item_price,
+               img_name
+        FROM cart c
+            inner join item i on c.item_id = i.item_id
+        WHERE cust_id = #{custId}
+          and c.item_id = #{itemId}
+
     </select>
     <select id="select" resultType="cartDto" fetchSize="100">
         select
             cust_id,
-            item_id,
+            c.item_id,
             count,
-            reg_date,
+            c.reg_date,
             item_name,
             item_price,
             img_name
@@ -54,11 +64,11 @@
             on duplicate key update count= count+#{count}
     </insert>
     <update id="update" parameterType="cartDto">
-        UPDATE cart SET count=#{count} WHERE cust_id=#{cartId}
+        UPDATE cart SET count=#{count} WHERE cust_id=#{custId}
                                                   and  item_id=#{itemId}
     </update>
     <delete id="delete" parameterType="cartDto">
-        DELETE FROM cart WHERE cust_id=#{cust_id}
-                           and  item_id=#{item_id}
+        DELETE FROM cart WHERE cust_id=#{custId}
+                           and  item_id=#{itemId}
     </delete>
 </mapper>

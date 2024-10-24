@@ -148,6 +148,23 @@
                         </div>
                     </div>
                 </li>
+
+                <!-- Nav Cart - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Cart</span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Cart Management:</h6>
+                            <a class="collapse-item" href="<c:url value="/cart/add"/>">Add</a>
+                            <a class="collapse-item" href="<c:url value="/cart/get"/>">Get</a>
+                        </div>
+                    </div>
+                </li>
             </c:if>
 
 

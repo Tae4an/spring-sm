@@ -47,4 +47,8 @@ public class CartService implements SMService<CartDto, CartDto> {
 
     }
 
+    public List<CartDto> get(String custId) throws Exception {
+        return cartRepository.selectOneCust(custId);
+    }
+
 }

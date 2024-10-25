@@ -1,20 +1,35 @@
 package edu.sm.controller;
 
+import edu.sm.util.FileUploadUtil;
+import edu.sm.util.WeatherUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @Slf4j
 public class MainController {
+    @Value("${app.key.weatherKey}")
+    private String weatherKey;
+
+    @Value("${app.key.weatherKey2}")
+    private String weatherKey2;
 
     @RequestMapping("/")
-    public String main(Model model){
+    public String main(Model model) {
         log.info("MainController");
 
         return "index";
     }
+
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("center", "login");
@@ -33,4 +48,21 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/webcam")
+    public String webCam(Model model) {
+        model.addAttribute("center", "webcam");
+        return "index";
+
+    }
+
+    @ResponseBody
+    @RequestMapping("/weather")
+    public Object wh(Model model) throws IOException, ParseException {
+        return WeatherUtil.getWeather("108",weatherKey);
+    }
+    @ResponseBody
+    @RequestMapping("/weather2")
+    public Object wh2(Model model) throws IOException, ParseException {
+        return WeatherUtil.getWeather2("1835847",weatherKey2);
+    }
 }

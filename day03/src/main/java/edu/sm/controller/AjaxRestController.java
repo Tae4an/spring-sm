@@ -4,14 +4,19 @@ package edu.sm.controller;
 import edu.sm.app.dto.CustDto;
 import edu.sm.app.dto.Marker;
 import edu.sm.app.service.CustService;
+import edu.sm.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,6 +28,10 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class AjaxRestController {
     final CustService custService;
+
+    @Value("${app.dir.uploadimgdir}")
+    private String uploadImgDir;
+
 
     @RequestMapping("/getctime")
     public Object getctime() {
@@ -52,10 +61,10 @@ public class AjaxRestController {
     public int getId(
             @RequestParam("r_id") String id
     ) throws Exception {
-        CustDto custDto =custService.get(id);
+        CustDto custDto = custService.get(id);
         if (custDto != null) {
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }
@@ -92,10 +101,19 @@ public class AjaxRestController {
         double lng = 127.075007;
         Random random = new Random();
         float num = random.nextFloat(1);
-        lat += num/10;
-        lng += num/10;
+        lat += num / 10;
+        lng += num / 10;
         obj.put("lat", lat);
         obj.put("lng", lng);
         return obj;
     }
+
+    @RequestMapping("/saveimg")
+    @ResponseBody
+    public String saveimg(@RequestParam("file") MultipartFile file) throws IOException {
+        String imgname = file.getOriginalFilename();
+        FileUploadUtil.saveFile(file, uploadImgDir);
+        return imgname;
+    }
+
 }

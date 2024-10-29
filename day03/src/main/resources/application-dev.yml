@@ -38,3 +38,5 @@ app:
   key:
     weatherKey: ENC(XteLAiAEklu01OJqdfavE34ZG+5YNiHd/7WyUIBTkcN+K0uE0mhiVuyRWRDjRZrL0AEOuP2GQHI80K3bSSv41oGqehUWslSAyem64jK0VARCe/8/1sWZi8uXf4XfSMUgNZrPAXYYC8+dnmW+BaHJIQ==)
     weatherKey2: ENC(VsqHasec9rH8AnrYqugS+7uz3ZNf6WKGrD17Oal2vT1TF7/c4zXNWFCYnbxlR8XC)
+    algo: PBEWithMD5AndDES
+    skey: mykey

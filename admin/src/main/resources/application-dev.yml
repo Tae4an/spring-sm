@@ -32,8 +32,13 @@ mybatis:
 app:
   url:
     server-url: http://127.0.0.1:81
+#    server-url: http://210.119.34.77:81
+
   dir:
     imgdir: file:///C:/spring_sm/imgs/  # 화면 출력 용
     uploadimgdir: C:/spring_sm/imgs/    # 파일 Write 용
     logdir: file:///C:/spring_sm/logs/
     readLogDir: C:/spring_sm/logs/
+  key:
+    algo: PBEWithMD5AndDES
+    skey: mykey

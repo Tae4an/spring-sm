@@ -30,6 +30,9 @@ mybatis:
     root: info
 
 app:
+  url:
+#     server-url: http://210.119.34.77:81
+    server-url: 210.119.34.236:81
   dir:
     imgdir: file:///C:/spring_sm/imgs/  # 화면 출력 용
     uploadimgdir: C:/spring_sm/imgs/    # 파일 Write 용

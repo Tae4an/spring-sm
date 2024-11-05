@@ -7,3 +7,5 @@ day01/target/*
 /day01-2/target/*
 /shopping_mall/admin/target/*
 /shopping_mall/service/target/*
+/imgs/*
+/logs/*

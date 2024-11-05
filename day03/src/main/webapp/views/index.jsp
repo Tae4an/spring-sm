@@ -25,6 +25,12 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+
+    <%-- Web Socket Lib    --%>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+
     <style>
         #back_img{
             width: auto;
@@ -95,6 +101,17 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/webcam"/> ">WebCam</a>
+                </li>
+                <!-- Web Socket -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="<c:url value="/websocket" />">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Web Socket</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<c:url value="/chat" />">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>chat</span></a>
                 </li>
             </c:if>
 

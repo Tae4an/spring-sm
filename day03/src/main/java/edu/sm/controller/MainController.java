@@ -23,6 +23,8 @@ public class MainController {
     @Value("${app.key.weatherKey2}")
     private String weatherKey2;
 
+    @Value("${app.url.server-url}")
+    private String serverUrl;
     @RequestMapping("/")
     public String main(Model model) {
         log.info("MainController");
@@ -64,5 +66,17 @@ public class MainController {
     @RequestMapping("/weather2")
     public Object wh2(Model model) throws IOException, ParseException {
         return WeatherUtil.getWeather2("1835847",weatherKey2);
+    }
+    @RequestMapping("/websocket")
+    public String websocket(Model model){
+        model.addAttribute("serverurl",serverUrl);
+        model.addAttribute("center","websocket");
+        return "index";
+    }
+    @RequestMapping("/chat")
+    public String chat(Model model){
+        model.addAttribute("serverurl",serverUrl);
+        model.addAttribute("center","chat");
+        return "index";
     }
 }

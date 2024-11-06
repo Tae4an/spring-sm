@@ -95,6 +95,7 @@
     };
     $(function () {
         center.init();
+        center_websocket.init();
     });
 </script>
 

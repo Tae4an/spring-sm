@@ -79,4 +79,12 @@ public class MainController {
         model.addAttribute("center","chat");
         return "index";
     }
+    @RequestMapping("/webrtc")
+    public String webrtc(Model model,
+                         @RequestParam(defaultValue = "default-room") String roomId) {
+        model.addAttribute("serverurl", serverUrl);
+        model.addAttribute("roomId", roomId);
+        model.addAttribute("center", "webrtc");
+        return "index";
+    }
 }

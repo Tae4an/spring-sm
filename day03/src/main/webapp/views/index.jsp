@@ -113,6 +113,11 @@
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>chat</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<c:url value="/webrtc" />">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>WebRTC</span></a>
+                </li>
             </c:if>
 
         </ul>

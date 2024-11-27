@@ -80,10 +80,9 @@ public class MainController {
         return "index";
     }
     @RequestMapping("/webrtc")
-    public String webrtc(Model model,
-                         @RequestParam(defaultValue = "default-room") String roomId) {
+    public String webrtc(Model model) {
         model.addAttribute("serverurl", serverUrl);
-        model.addAttribute("roomId", roomId);
+        model.addAttribute("roomId", "1");    // 하드코딩된 roomId
         model.addAttribute("center", "webrtc");
         return "index";
     }

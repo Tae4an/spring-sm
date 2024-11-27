@@ -31,8 +31,9 @@ mybatis:
 
 app:
   url:
-    server-url: http://127.0.0.1:81
+#    server-url: http://127.0.0.1:81
 #    server-url: http://210.119.34.77:81
+    server-url: http://210.119.34.236:80
 
   dir:
     imgdir: file:///C:/spring_sm/imgs/  # 화면 출력 용
